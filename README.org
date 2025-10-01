@@ -1,4 +1,4 @@
-* CWM
+* SNFWM(Stacking is Not Floating Window Manager)
 :PROPERTIES:
 :CUSTOM_ID: cwm
 :END:
