@@ -1,0 +1,12 @@
+* CWM
+:PROPERTIES:
+:CUSTOM_ID: cwm
+:END:
+** Tests
+:PROPERTIES:
+:CUSTOM_ID: tests
+:END:
+- These are done once a file changes, not always on build process,
+  because it's too heavy and useless.
+- For testing env use criterion
+- happy coding
