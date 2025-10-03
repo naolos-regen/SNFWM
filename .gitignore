@@ -1,0 +1,7 @@
+scfwm
+make_install.cmake
+CMakeCache.txt
+.idea/
+cmake-build-debug
+CMakeFiles
+
