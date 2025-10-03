@@ -1,7 +1,21 @@
 * SNFWM(Stacking is Not Floating Window Manager)
 :PROPERTIES:
-:CUSTOM_ID: cwm
+:CUSTOM_ID: snfwm
 :END:
+* How-to-run
+
+#+BEGIN_SRC bash
+>$ pwd
+# ...../scfwm
+>$ cmake .
+# build files written to ...
+>$ make
+# [100%] Built target
+>$ ./runner.sh
+# for testing purposes
+# press enter to kill all processes (within the terminal)
+#+END_SRC
+
 ** Tests
 :PROPERTIES:
 :CUSTOM_ID: tests
