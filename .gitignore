@@ -1,5 +1,5 @@
 scfwm
-make_install.cmake
+cmake_install.cmake
 CMakeCache.txt
 .idea/
 cmake-build-debug
