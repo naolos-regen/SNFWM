@@ -13,6 +13,8 @@ include_directories(include)
 
 add_executable(scfwm
         include/x11_helpers.h
+        include/logger.h
+        src/logger/logger.c
         src/x11_helpers/x11_error_handler.c
         src/x11_helpers/x11_free.c
         src/x11_helpers/x11_init_display.c

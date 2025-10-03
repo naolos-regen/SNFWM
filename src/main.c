@@ -1,16 +1,18 @@
 #include "../include/x11_helpers.h"
 
-int main(void)
+int
+main (void)
 {
-    x11_display display;
+	x11_display display;
 
-    if (!x11_init_display(&display))
-    {
-      return (-1);
-    }
-	x11_set_masks(&display);
+	if (!x11_init_display (&display)) {
+			return (-1);
+	}
 
-    x11_free(&display);
+	x11_set_masks (&display);
 
-    return (1);
+	x11_free (&display);
+
+	return (1);
 }
+
