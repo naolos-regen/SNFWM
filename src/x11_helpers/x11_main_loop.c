@@ -1,5 +1,5 @@
 #include "../../include/x11_helpers.h"
-#include "../../include/logger.h"
+#include "../../include/x11_events.h"
 
 void x11_main_loop(x11_display *dp)
 {
@@ -7,17 +7,7 @@ void x11_main_loop(x11_display *dp)
         while(1)
         {
                 XNextEvent(dp->display, &ev);
-                switch (ev.type)
-                {
-                        case KeyPress:
-                                log_info("key has been pressed");
-                                break;
-                        case MotionNotify:
-                                log_info("motion");
-                                break;
-                        default:
-                                log_warn("not handled");
-                                break;
-                }
+                if (handler[ev.type]) 
+                        handler[ev.type](&ev);
         }
 }
