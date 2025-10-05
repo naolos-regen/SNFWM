@@ -1,5 +1,7 @@
 #!/bin/bash
 
+time make debug
+
 DISPLAY_NUM=:2
 XEPHYR_RES="1600x900"
 
@@ -12,7 +14,8 @@ sleep 1
 
 export DISPLAY=$DISPLAY_NUM
 
-./scfwm &
+./bin/snfwm &
+
 WM_PID=$!
 
 sleep 1
