@@ -1,7 +1,7 @@
 #include "../../include/x11_helpers.h"
 
 int
-x11_free (const x11_display *display)
+x11_free (x11_display *dp)
 {
-	return (XCloseDisplay (display->display));
+	return (XCloseDisplay (dp->display));
 }
