@@ -5,15 +5,10 @@
 * How-to-run
 
 #+BEGIN_SRC bash
->$ pwd
-# ...../scfwm
->$ cmake .
-# build files written to ...
->$ make
-# [100%] Built target
->$ ./runner.sh
+>$ make debug
 # for testing purposes
-# press enter to kill all processes (within the terminal)
+>$ ./runner.sh
+# will run the process in Xephyr
 #+END_SRC
 
 ** Tests
