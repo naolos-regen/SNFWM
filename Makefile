@@ -1,25 +1,25 @@
-CC 		= gcc
-CFLAGS 		= -Wall -Wextra -I./include 
-CLIBS 		= -lX11
-CTEST_LIBS 	= -lX11 -lcriterion
-DEBUG_FLAGS 	= -g -DDEBUG
-RELEASE_FLAGS 	= -O2
+CC 					= gcc
+CFLAGS 				= -Wall -Wextra -I./include 
+CLIBS 				= -lX11
+CTEST_LIBS 			= -lX11 -lcriterion
+DEBUG_FLAGS 		= -g -DDEBUG
+RELEASE_FLAGS 		= -O2
 
-SRC_DIR 	= src
-TEST_DIR 	= test
-INCLUDE_DIR 	= include
-BIN_DIR 	= bin
-OBJ_DIR 	= obj
+SRC_DIR 			= src
+TEST_DIR 			= test
+INCLUDE_DIR 		= include
+BIN_DIR 			= bin
+OBJ_DIR 			= obj
 
-MAIN_SRC 	= $(SRC_DIR)/main.c
-SRCS 		= $(wildcard $(SRC_DIR)/*.c) \
-       			$(wildcard $(SRC_DIR)/logger/*.c) \
-       			$(wildcard $(SRC_DIR)/x11_helpers/*.c)
-OBJS 		= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+MAIN_SRC 			= $(SRC_DIR)/main.c
+SRCS 				= $(wildcard $(SRC_DIR)/*.c) \
+       						$(wildcard $(SRC_DIR)/logger/*.c) \
+       						$(wildcard $(SRC_DIR)/x11_helpers/*.c)
+OBJS 				= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
-EXECUTABLE 	= snfwm
+EXECUTABLE 			= snfwm
 
-TEST_EXECUTABLE = run_tests
+TEST_EXECUTABLE 	= run_tests
 
 all : debug
 
