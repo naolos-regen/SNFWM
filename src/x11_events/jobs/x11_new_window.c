@@ -5,6 +5,4 @@ new_window (XCreateWindowEvent *e)
 {
         if (e->override_redirect)
                 return;
-
-        
 }
