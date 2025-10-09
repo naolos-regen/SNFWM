@@ -35,4 +35,7 @@ extern snfwm_window *head;
 extern snfwm_window *tail;
 extern snfwm_window *curr;
 
+extern x11_display  *display;
+extern Atom          restart;
+
 #endif
