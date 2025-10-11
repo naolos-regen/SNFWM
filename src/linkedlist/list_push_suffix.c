@@ -2,17 +2,21 @@
 
 
 // TODO: test if it even works dummy
-static void
-list_to_end(t_window_list **list)
+static t_window_list *
+list_to_end(t_window_list *list)
 {
-        while ((*list)->next != NULL)
-                (*list) = (*list)->next;
+        if (!list)
+                return (NULL);
+        while (list->next != NULL)
+                list = list->next;
+        return (list);
 }
 
 int
 list_push_suffix(t_window_list **list, snfwm_window *window)
 {
         t_window_list *node;
+        t_window_list *idx;
 
         node = create_elem(window);
         if (NULL == node)
@@ -22,8 +26,7 @@ list_push_suffix(t_window_list **list, snfwm_window *window)
                 *list = node;
                 return (-1);
         }
-        t_window_list *idx = *list;
-        list_to_end(&idx); 
+        idx = list_to_end(*list);
         idx->next  = node;
         node->prev = idx;
         return (1);
