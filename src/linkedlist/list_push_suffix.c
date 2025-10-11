@@ -1,7 +1,6 @@
 #include "../../include/linkedlist.h"
 
 
-// TODO: test if it even works dummy
 static t_window_list *
 list_to_end(t_window_list *list)
 {
