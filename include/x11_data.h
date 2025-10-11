@@ -21,7 +21,6 @@ struct s_window
     Window window;
     char *window_name;
     int state;
-    struct s_window *next, *prev;
 };
 
 struct x11_dp
@@ -30,9 +29,7 @@ struct x11_dp
     Window root;
 };
 
-
-extern snfwm_window *head;
-extern snfwm_window *tail;
-extern snfwm_window *curr;
+extern x11_display  *display;
+extern Atom          restart;
 
 #endif
