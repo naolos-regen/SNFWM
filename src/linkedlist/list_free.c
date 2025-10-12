@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 void
-list_free(t_window_list **begin_list)
+free_list(t_window_list **begin_list)
 {
         if (!begin_list || !*begin_list)
                 return;
