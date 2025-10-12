@@ -1,6 +1,5 @@
 #include "../../include/linkedlist.h"
 
-
 static t_window_list *
 list_to_end(t_window_list *list)
 {

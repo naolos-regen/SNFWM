@@ -18,6 +18,7 @@ get_node_at(t_window_list *idx, int pos)
         return idx;
 }
 
+// TODO: this might not work (?)
 int
 list_push_infix(t_window_list **begin_list, snfwm_window *window, int pos)
 {
