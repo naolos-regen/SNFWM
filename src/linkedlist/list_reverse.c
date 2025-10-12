@@ -1,29 +1,29 @@
 #include "../../include/linkedlist.h"
 
-static void
-swap_nodes(t_window_list *n1, t_window_list *n2)
-{
-        n1 = n2->next;
-        n2->next = n2->prev;
-        n2->prev = n1;
-}
-
-void
+void 
 list_reverse(t_window_list **begin_list)
 {
-        t_window_list    *temp;
-        t_window_list    *current;
+    t_window_list *temp;
+    t_window_list *current;
 
-        current = *begin_list;
-        while (current)
+    if (!begin_list || !*begin_list)
+        return;
+
+    current = *begin_list;
+
+    while (current)
+    {
+        temp = current->next;
+        current->next = current->prev;
+        current->prev = temp;
+
+        if (!temp)
         {
-                swap_nodes(temp, current);
-
-                if (current->next == NULL)
-                {
-                        *begin_list = current;
-                        break;
-                }
-                current = current->next;
+            *begin_list = current;
+            break;
         }
+
+        current = temp;
+    }
 }
+

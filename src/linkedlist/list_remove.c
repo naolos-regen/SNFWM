@@ -1,4 +1,5 @@
 #include "../../include/linkedlist.h"
+#include <stdlib.h>
 
 static int
 sanity_check(t_window_list **begin_list, t_window_list *remove)
@@ -19,8 +20,6 @@ remove_node(t_window_list **begin_list, t_window_list *remove)
                 *begin_list = remove->next;
         if (remove->next != NULL)
                 remove->next->prev = remove->prev;
-
-        free_node(remove);
         return (0);
 }
 
@@ -28,6 +27,7 @@ int
 list_remove(t_window_list **begin_list, snfwm_window *data)
 {
         t_window_list *current;
+        t_window_list *next;
 
         if (!begin_list || !*begin_list || !data)
                 return (-1);
@@ -35,9 +35,10 @@ list_remove(t_window_list **begin_list, snfwm_window *data)
         current = *begin_list;
         while (current)
         {
+                next = current->next;
                 if (comparator(data, current->window) == 0)
                        remove_node(begin_list, current);
-                current = current->next;
+                current = next;
         }
         return (-1);
 }
