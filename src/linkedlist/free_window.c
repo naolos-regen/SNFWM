@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 void
-free_window(snfwm_window *window)
+free_window(const snfwm_window *window)
 {
         if (!window || !display->display)
                 return;
