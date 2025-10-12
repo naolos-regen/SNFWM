@@ -1,25 +1,33 @@
-CC 					= gcc
-CFLAGS 				= -Wall -Wextra -I./include 
-CLIBS 				= -lX11
-CTEST_LIBS 			= -lX11 -lcriterion
-DEBUG_FLAGS 		= -g -DDEBUG
-RELEASE_FLAGS 		= -O2
+CC               = gcc
+CFLAGS           = -Wall -Wextra -I./include
+CLIBS            = -lX11
+CTEST_LIBS       = -lX11 -lcriterion
+DEBUG_FLAGS      = -g -DDEBUG
+RELEASE_FLAGS    = -O2
 
-SRC_DIR 			= src
-TEST_DIR 			= test
-INCLUDE_DIR 		= include
-BIN_DIR 			= bin
-OBJ_DIR 			= obj
+SRC_DIR          = src
+TEST_DIR         = test
+INCLUDE_DIR      = include
+BIN_DIR          = bin
+OBJ_DIR          = obj
 
-MAIN_SRC 			= $(SRC_DIR)/main.c
-SRCS 				= $(wildcard $(SRC_DIR)/*.c) \
-       						$(wildcard $(SRC_DIR)/logger/*.c) \
-       						$(wildcard $(SRC_DIR)/x11_helpers/*.c)
-OBJS 				= $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+MAIN_SRC         = $(SRC_DIR)/main.c
+SRCS             = $(wildcard $(SRC_DIR)/*.c) \
+                   $(wildcard $(SRC_DIR)/logger/*.c) \
+		   $(wildcard $(SRC_DIR)/linkedlist/*.c) \
+                   $(wildcard $(SRC_DIR)/x11_helpers/*.c) \
+		   $(wildcard $(SRC_DIR)/x11_events/*c) \
+		   $(wildcard $(SRC_DIR)/x11_events/jobs/*.c) \
+		   $(wildcard $(SRC_DIR)/x11_events/events/*c)
 
-EXECUTABLE 			= snfwm
+OBJS             = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
-TEST_EXECUTABLE 	= run_tests
+EXECUTABLE       = snfwm
+TEST_EXECUTABLE  = run_tests
+
+# Recursively find all .c test files in test directory
+TEST_SRCS        := $(shell find $(TEST_DIR) -name '*.c')
+TEST_SRCS        := $(filter-out $(SRC_DIR)/main.c,$(TEST_SRCS))
 
 all : debug
 
@@ -43,15 +51,15 @@ $(BIN_DIR)/$(EXECUTABLE): $(OBJS) | $(BIN_DIR)
 
 test: $(BIN_DIR)/$(TEST_EXECUTABLE)
 
-$(BIN_DIR)/$(TEST_EXECUTABLE): $(SRCS) $(TEST_DIR)/*.c | $(BIN_DIR)
-	@if [ ! -d "$(TEST_DIR)" ] || [ -z "$(ls -A $(TEST_DIR))" ]; then \
-		echo "No tests found. Create test file in the test/ directory."; \
-		touch $(TEST_DIR)/placeholder_test.c; \
+$(BIN_DIR)/$(TEST_EXECUTABLE): $(SRCS) $(TEST_SRCS) | $(BIN_DIR)
+	@if [ -z "$(TEST_SRCS)" ]; then \
+		echo "No test files found in $(TEST_DIR)."; \
+		exit 1; \
 	fi
 	$(CC) $(CFLAGS) $(DEBUG_FLAGS) \
 		-I./include \
 		$(filter-out $(SRC_DIR)/main.c,$(SRCS)) \
-		$(TEST_DIR)/*.c \
+		$(TEST_SRCS) \
 		-o $@ \
 		$(CTEST_LIBS)
 
@@ -61,7 +69,7 @@ clean:
 run: debug
 	./runner.sh
 
-run-test:
+run-test: test
 	./$(BIN_DIR)/$(TEST_EXECUTABLE)
 
 .PHONY: all debug release test clean run run-test
