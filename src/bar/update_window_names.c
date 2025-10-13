@@ -1,0 +1,102 @@
+#include "../../include/x11_helpers.h"
+#include "../../include/x11_config.h"
+#include "../../include/bar.h"
+#include <stdio.h>
+
+#define FONT_HEIGHT(f) ((f)->max_bounds.ascent + (f)->max_bounds.descent)
+
+
+static size_t
+strlen(const char *str)
+{
+        const char *sc;
+
+        sc = str;
+        while (*sc != '\0')
+                ++sc;
+        return sc - str;
+}
+
+static int
+calc_bar_width(XFontStruct *p, t_window_list **begin_list)
+{
+        char str[100];
+        int i;
+        int size = 1;
+        t_window_list *current;
+
+        i = 0;
+        current = *begin_list;
+        while(current)
+        {
+                if (current->window->state == STATE_UNMAPPED) 
+                        continue;
+                sprintf(str, "%d-%s", i, current->window->window_name);
+                size += 10 + XTextWidth(p, str, strlen(str));
+                current = current->next;
+                i++;
+        }
+        return (size);
+}
+
+static int
+bar_x(snfwm_screen *scr, int width)
+{
+        if (BAR_LOCATION >= 2) return scr->attr_root.width - width;
+        else return (0);
+}
+
+static int
+bar_y(snfwm_screen *scr)
+{
+        if (BAR_LOCATION % 2) return (0);
+        else return scr->attr_root.height - (FONT_HEIGHT (scr->font) + BAR_PADDING * 2) - 2;
+
+}
+
+void
+update_window_names(t_window_list *w)
+{
+        x11_display *dpy = x11_display_instance();
+        t_window_list *current;
+        char str[100];
+        int i;
+        int width;
+        int cur_x;
+
+        width = calc_bar_width(w->window->screen->font, &w);
+        cur_x = 5;
+        
+        if (!w->window->screen->bar_raised) return;
+        XMoveResizeWindow
+        (
+                        dpy->display, w->window->screen->bar_window, 
+                        bar_x (w->window->screen, width), 
+                        bar_y(w->window->screen), width, 
+                        (FONT_HEIGHT (w->window->screen->font) + BAR_PADDING * 2)
+        );
+        XClearWindow(dpy->display, w->window->screen->bar_window);
+        XRaiseWindow(dpy->display, w->window->screen->bar_window);
+
+        i = 0;
+        current = w;
+        while (current)
+        {
+                if (current->window->state == STATE_UNMAPPED) continue;
+                sprintf(str, "%d-%s", i, current->window->window_name);
+                size_t str_len = strlen(str);
+                XDrawString
+                (
+                                dpy->display, 
+                                w->window->screen->bar_window, 
+                                w->window->screen->gc_normal, 
+                                cur_x,
+                                BAR_PADDING + w->window->screen->font->max_bounds.ascent, 
+                                str, 
+                                str_len
+                );
+                
+                cur_x = cur_x + 10 + XTextWidth (w->window->screen->font, str, str_len);
+                current = current->next;
+        }
+}
