@@ -16,5 +16,11 @@ x11_init_display (x11_display *dp)
                 return (-1);
         }
         dp->root    = XDefaultRootWindow (dp->display);
+        
+        dp->head    = NULL;
+        dp->tail    = NULL;
+        dp->current = NULL;
+        dp->screens = NULL;
+
         return 1;
 }
