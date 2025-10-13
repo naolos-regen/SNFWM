@@ -4,13 +4,26 @@
 #include <X11/keysym.h>
 
 #define KEY_PREFIX      't'
-
-#define BAR_PADDING     3
-#define BAR_LOCATION    3
-
 #define MODIFIER_PREFIX ControlMask
-#define TERM_PROG       "alacritty"
-#define KEY_ALACRITTY   'c'
 
+#define KEY_XTERM       'c'
+#define KEY_EMACS       'e'
+#define KEY_PREVWINDOW  'p'
+#define KEY_NEXTWINDOW  'n'	
+#define KEY_LASTWINDOW  't'	
+#define KEY_TOGGLEBAR   'w'	
+#define KEY_DELETE      'k'	
+
+#define TERM_PROG       "xterm"	
+#define EMACS_PROG      "emacs"	
+
+#define BAR_FG_COLOR    "Gray60"
+#define BAR_BG_COLOR    "Lightgreen"
+#define BAR_BOLD_COLOR  "Black" 
+
+#define FONT_NAME       "fixed"	
+#define BAR_PADDING     3	
+#define BAR_LOCATION    3	
+#define BAR_TIMEOUT     5	
 
 #endif

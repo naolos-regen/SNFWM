@@ -5,7 +5,7 @@
 #include "x11_data.h"
 
 extern void new_window   (t_window_list *w, const XCreateWindowEvent *e);
-extern void grab_keys    ();
+extern void grab_keys    (struct s_screen *s);
 extern void scan_windows (struct s_screen *s);
 extern void manage       (struct s_window *w, struct s_screen *s);
 extern void unmanage     (struct s_window *w);
