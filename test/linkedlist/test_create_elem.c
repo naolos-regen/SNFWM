@@ -26,11 +26,7 @@ Test(create_elem, basic)
 Test(create_elem, create_with_null_window)
 {
         t_window_list *elem = create_elem(NULL);
-        cr_assert_not_null(elem);
-        cr_assert_null(elem->window);
-        cr_assert_null(elem->prev);
-        cr_assert_null(elem->next);
-        free(elem);
+        cr_assert_null(elem);
 }
 
 Test(window_list, link_elements)
