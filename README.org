@@ -19,3 +19,7 @@
   because it's too heavy and useless.
 - For testing env use criterion
 - happy coding
+
+** Todos
+- I gotta stop thinking that globals are a bad thing.
+- I gotta stop wanting to generalize things that i only need for 1 useage.
