@@ -1,7 +1,7 @@
 #include "../../include/x11_helpers.h"
 #include "../../include/logger.h"
 
-x11_display 
+x11_display *
 x11_display_instance()
 {
         static x11_display dp;
@@ -19,5 +19,5 @@ x11_display_instance()
                 initialized = 1;
 
         }
-        return dp;
+        return &dp;
 }
