@@ -1,6 +1,6 @@
 #!/bin/bash
 
-time make debug
+time make debug 
 
 DISPLAY_NUM=:2
 XEPHYR_RES="1600x900"
@@ -20,7 +20,7 @@ WM_PID=$!
 
 sleep 1
 
-alacritty &
+xterm &
 
 read -p "press to exit"
 

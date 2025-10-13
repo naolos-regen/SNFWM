@@ -18,7 +18,8 @@ SRCS             = $(wildcard $(SRC_DIR)/*.c) \
                    $(wildcard $(SRC_DIR)/x11_helpers/*.c) \
 		   $(wildcard $(SRC_DIR)/x11_events/*c) \
 		   $(wildcard $(SRC_DIR)/x11_events/jobs/*.c) \
-		   $(wildcard $(SRC_DIR)/x11_events/events/*c)
+		   $(wildcard $(SRC_DIR)/x11_events/events/*c) \
+		   $(wildcard $(SRC_DIR)/bar/*.c)
 
 OBJS             = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
