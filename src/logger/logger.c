@@ -1,5 +1,16 @@
 #include "../../include/logger.h"
 
+
+const char *level_strings[] = {
+	"DEBUG", "TEST", "INFO", "ERROR", "WARN", "FATAL"
+};
+
+#define COLOR_RESET   "\033[0m"
+const char *level_colors[] = {
+	"\x1b[94m", "\x1b[36m", "\x1b[32m", "\x1b[33m", "\x1b[31m", "\x1b[35m"
+};
+
+
 void _log(int level, const char *file, int line, const char *format, ...)
 {
 	char timestamp[64];
