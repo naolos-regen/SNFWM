@@ -57,8 +57,8 @@ handle_key (snfwm_screen *s)
                         last_window();
                         break;
                 case KEY_DELETE:
-                        //if (ev.xkey.state & ShiftMask) kill_window();
-                        //else delete_window();
+                        if (ev.xkey.state & ShiftMask) kill_window();
+                        else delete_window();
                         break;
                 default:
                         log_warn("not handled");

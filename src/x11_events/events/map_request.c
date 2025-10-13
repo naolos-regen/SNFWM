@@ -30,4 +30,9 @@ void map_request(const XEvent *event)
                         break;
                 }
         }
+        else 
+        {
+                log_warn("unmanaged window");
+                XMapWindow(dpy->display, event->xmap.window);
+        }
 }

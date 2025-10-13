@@ -3,5 +3,5 @@
 
 void configure_notify(const XEvent *event)
 {
-    log_info("to implement");
+        log_info("to implement");
 }
