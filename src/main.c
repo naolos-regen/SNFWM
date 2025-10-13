@@ -73,11 +73,7 @@ main (void)
 
         dp = x11_display_instance();
 
-
-
         font = XLoadQueryFont(dp->display, FONT_NAME);
-
-
         if (font == NULL)
         {
                 log_warn("cannot load font");
@@ -98,9 +94,7 @@ main (void)
 
                 i++;
         }
-         
         log_debug("hello 2");
-
         wm_state = XInternAtom(dp->display, "WM_STATE", False);
         wm_change_state = XInternAtom(dp->display, "WM_CHANGE_STATE", False);
         wm_protocols = XInternAtom(dp->display, "WM_PROTOCOLS", False);
