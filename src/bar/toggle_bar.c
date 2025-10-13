@@ -1,7 +1,7 @@
 #include "../../include/bar.h"
 
 void
-toggle_bar (t_window_list *w)
+toggle_bar (snfwm_screen *w)
 {
         if (!hide_bar(w)) show_bar(w);
 }

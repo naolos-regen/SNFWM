@@ -55,7 +55,7 @@ bar_y(snfwm_screen *scr)
 }
 
 void
-update_window_names(t_window_list *w)
+update_window_names(snfwm_screen *s)
 {
         x11_display *dpy = x11_display_instance();
         t_window_list *current;
@@ -64,22 +64,22 @@ update_window_names(t_window_list *w)
         int width;
         int cur_x;
 
-        width = calc_bar_width(w->window->screen->font, &w);
+        width = calc_bar_width(s->font, &dpy->head);
         cur_x = 5;
         
-        if (!w->window->screen->bar_raised) return;
+        if (!s->bar_raised) return;
         XMoveResizeWindow
         (
-                        dpy->display, w->window->screen->bar_window, 
-                        bar_x (w->window->screen, width), 
-                        bar_y(w->window->screen), width, 
-                        (FONT_HEIGHT (w->window->screen->font) + BAR_PADDING * 2)
+                        dpy->display, s->bar_window, 
+                        bar_x (s, width), 
+                        bar_y(s), width, 
+                        (FONT_HEIGHT (s->font) + BAR_PADDING * 2)
         );
-        XClearWindow(dpy->display, w->window->screen->bar_window);
-        XRaiseWindow(dpy->display, w->window->screen->bar_window);
+        XClearWindow(dpy->display, s->bar_window);
+        XRaiseWindow(dpy->display, s->bar_window);
 
         i = 0;
-        current = w;
+        current = dpy->head;
         while (current)
         {
                 if (current->window->state == STATE_UNMAPPED) continue;
@@ -88,15 +88,15 @@ update_window_names(t_window_list *w)
                 XDrawString
                 (
                                 dpy->display, 
-                                w->window->screen->bar_window, 
-                                w->window->screen->gc_normal, 
+                                s->bar_window, 
+                                s->gc_normal, 
                                 cur_x,
-                                BAR_PADDING + w->window->screen->font->max_bounds.ascent, 
+                                BAR_PADDING + s->font->max_bounds.ascent, 
                                 str, 
                                 str_len
                 );
                 
-                cur_x = cur_x + 10 + XTextWidth (w->window->screen->font, str, str_len);
+                cur_x = cur_x + 10 + XTextWidth (s->font, str, str_len);
                 current = current->next;
         }
 }

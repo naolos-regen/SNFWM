@@ -2,14 +2,14 @@
 #include "../../include/bar.h"
 
 int
-show_bar(t_window_list *w)
+show_bar(snfwm_screen *s)
 {
-        if (w->window->screen->bar_raised)
+        if (s->bar_raised)
         {
                 x11_display *dpy = x11_display_instance();
-                w->window->screen->bar_raised = 1;
-                XMapWindow(dpy->display, w->window->screen->bar_window);
-                update_window_names(w);
+                s->bar_raised = 1;
+                XMapWindow(dpy->display, s->bar_window);
+                update_window_names(s);
                 
                 return (1);
         }
