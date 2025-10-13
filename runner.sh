@@ -20,7 +20,7 @@ WM_PID=$!
 
 sleep 1
 
-xterm &
+alacritty &
 
 read -p "press to exit"
 
