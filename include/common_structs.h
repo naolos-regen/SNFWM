@@ -26,7 +26,7 @@ struct s_screen
     GC bold_gc;
     XFontStruct *font;
     XWindowAttributes attr_root;
-    Window bar_window, key_window;
+    Window root, bar_window, key_window;
     int bar_raised;
     int screen_num;
     Colormap def_cmap;
@@ -45,6 +45,9 @@ struct x11_dp
 {
     Display *display;
     Window root;
+    t_window_list *head, *tail;
+    t_window_list *current;
+    snfwm_screen  *screens;
 };
 
 #endif

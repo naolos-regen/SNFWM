@@ -4,9 +4,15 @@
 #include <X11/Xlib.h>
 #include "common_structs.h"
 
-extern x11_display  *display;
-extern Atom          restart;
-extern t_window_list *head, *tail;
-extern t_window_list *current;
+extern int      num_screens;
+extern Atom     restart;
+extern Atom     wm_state;
+extern Atom     wm_change_state;
+extern Atom     wm_protocols;
+extern Atom     wm_delete;
+extern Atom     wm_take_focus;
+extern Atom     wm_colormaps;
+
+extern int exit_signal;
 
 #endif

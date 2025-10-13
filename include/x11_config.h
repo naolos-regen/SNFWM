@@ -3,8 +3,14 @@
 
 #include <X11/keysym.h>
 
-#define MODIFIER_PREFIX 133
+#define KEY_PREFIX      't'
+
+#define BAR_PADDING     3
+#define BAR_LOCATION    3
+
+#define MODIFIER_PREFIX ControlMask
 #define TERM_PROG       "alacritty"
-#define KEY_ALACRITTY   36
+#define KEY_ALACRITTY   'c'
+
 
 #endif

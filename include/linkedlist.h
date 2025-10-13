@@ -7,6 +7,7 @@ t_window_list  *create_elem       (snfwm_window *window);
 t_window_list  *list_last         (t_window_list *begin_list);
 t_window_list  *list_at           (t_window_list *begin_list, unsigned int n);
 t_window_list  *list_find         (t_window_list *begin_list, snfwm_window *data_reference);
+t_window_list  *list_find_window  (t_window_list *begin_list, Window window);
 
 int             list_push_prefix  (t_window_list **begin_list, snfwm_window *window);
 int             list_push_infix   (t_window_list **begin_list, snfwm_window *window, int pos);
@@ -23,7 +24,7 @@ extern int      comparator        (const snfwm_window *w1, const snfwm_window *w
 extern void     free_window       (snfwm_window *window);
 extern void     free_list         (t_window_list **begin_list);
 extern void     free_node         (t_window_list *node);
-extern void     set_active_window (const t_window_list *window);
+extern void     set_active_window (t_window_list *window);
 
 
 #endif
