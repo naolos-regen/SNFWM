@@ -4,15 +4,25 @@
 #include <X11/Xlib.h>
 #include "common_structs.h"
 
-extern int      num_screens;
-extern Atom     restart;
-extern Atom     wm_state;
-extern Atom     wm_change_state;
-extern Atom     wm_protocols;
-extern Atom     wm_delete;
-extern Atom     wm_take_focus;
-extern Atom     wm_colormaps;
+
+extern x11_display      *dpy;
+extern XFontStruct      *font;
+extern int              num_screens;
+extern Atom             restart;
+extern Atom             wm_state;
+extern Atom             wm_change_state;
+extern Atom             wm_protocols;
+extern Atom             wm_delete;
+extern Atom             wm_take_focus;
+extern Atom             wm_colormaps;
 
 extern int exit_signal;
+
+extern void initialize_screen  (snfwm_screen *s, int i);
+extern void initialize_display ();
+extern void initialize_font    ();
+extern void initialize_screens ();
+extern void initialize_atoms   ();
+extern void initialize_all     ();
 
 #endif
