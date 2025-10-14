@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 void
-initialize_display ()
+initialize_display (void)
 {
         log_info("we are in initialize_display");
         dpy = malloc(sizeof(x11_display));

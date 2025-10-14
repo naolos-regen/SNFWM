@@ -28,9 +28,9 @@ extern void     free_node         (t_window_list *node);
 extern void     set_current_window(t_window_list *window);
 extern void     set_active_window (t_window_list *window);
 
-extern void     next_window       ();
-extern void     prev_window       ();
-extern void     last_window       ();
+extern void     next_window       (void);
+extern void     prev_window       (void);
+extern void     last_window       (void);
 extern void     goto_window_number (int n);
 
 

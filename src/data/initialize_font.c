@@ -4,7 +4,7 @@
 
 
 void
-initialize_font ()
+initialize_font (void)
 {
         font = XLoadQueryFont(dpy->display, FONT_NAME);
         if (NULL == font)

@@ -10,7 +10,7 @@ extern void scan_windows (struct s_screen *s);
 extern void manage       (struct s_window *w, struct s_screen *s);
 extern void spawn        (char *prog);
 extern void unmanage     (struct s_window *w);
-extern void delete_window();
-extern void kill_window  ();
+extern void delete_window(void);
+extern void kill_window  (void);
 
 #endif

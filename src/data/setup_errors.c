@@ -48,7 +48,7 @@ x11_error_handler(Display *dp, XErrorEvent *ev)
 }
 
 void
-setup_errors ()
+setup_errors (void)
 {
         XErrorHandler(x11_error_handler);
         if (signal(SIGALRM, alarm_handler) == SIG_IGN) 

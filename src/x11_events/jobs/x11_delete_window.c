@@ -3,7 +3,7 @@
 #include "../../../include/logger.h"
 
 void
-delete_window ()
+delete_window (void)
 {
         XEvent       ev;
         int          st;

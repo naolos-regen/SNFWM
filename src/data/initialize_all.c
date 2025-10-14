@@ -2,7 +2,7 @@
 #include "../../include/logger.h"
 
 void
-initialize_all()
+initialize_all (void)
 {
         log_info("into the function initialize_all");
         initialize_display ();

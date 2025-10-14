@@ -11,9 +11,9 @@
                    SubstructureNotifyMask)
 
 
-extern int x11_free ();
-extern int x11_set_masks ();
-extern void x11_main_loop();
+extern int x11_free (void);
+extern int x11_set_masks (void);
+extern void x11_main_loop(void);
 extern snfwm_screen *find_screen(Window window);
 
 #endif

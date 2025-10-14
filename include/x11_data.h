@@ -21,11 +21,11 @@ extern Atom             wm_colormaps;
 extern int exit_signal;
 
 extern void initialize_screen  (snfwm_screen *s, int i);
-extern void initialize_display ();
-extern void initialize_font    ();
-extern void initialize_screens ();
-extern void initialize_atoms   ();
-extern void initialize_all     ();
-extern void setup_errors       ();
+extern void initialize_display (void);
+extern void initialize_font    (void);
+extern void initialize_screens (void);
+extern void initialize_atoms   (void);
+extern void initialize_all     (void);
+extern void setup_errors       (void);
 
 #endif

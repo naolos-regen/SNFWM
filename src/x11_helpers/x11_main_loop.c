@@ -2,7 +2,7 @@
 #include "../../include/x11_events.h"
 
 void 
-x11_main_loop()
+x11_main_loop (void)
 {
         XEvent ev;
         while(1)

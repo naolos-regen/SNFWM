@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 void
-initialize_screens ()
+initialize_screens (void)
 {
         int i;
         num_screens = ScreenCount(dpy->display);
