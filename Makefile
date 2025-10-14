@@ -18,6 +18,7 @@ SRCS             = $(wildcard $(SRC_DIR)/*.c) \
 		   $(wildcard $(SRC_DIR)/x11_events/*c) \
 		   $(wildcard $(SRC_DIR)/x11_events/jobs/*.c) \
 		   $(wildcard $(SRC_DIR)/x11_events/events/*c) \
+		   $(wildcard $(SRC_DIR)/data/*.c) \
 		   $(wildcard $(SRC_DIR)/bar/*.c)
 
 OBJS             = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
@@ -25,7 +26,6 @@ OBJS             = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 EXECUTABLE       = snfwm
 TEST_EXECUTABLE  = run_tests
 
-# Recursively find all .c test files in test directory
 TEST_SRCS        := $(shell find $(TEST_DIR) -name '*.c' ! -name 'test_globals.c')
 TEST_SRCS        := $(filter-out $(SRC_DIR)/main.c,$(TEST_SRCS))
 
@@ -39,26 +39,22 @@ $(OBJ_DIR) $(BIN_DIR):
 	@mkdir -p $(OBJ_DIR)/x11_events
 	@mkdir -p $(OBJ_DIR)/x11_events/jobs
 	@mkdir -p $(OBJ_DIR)/x11_events/events
+	@mkdir -p $(OBJ_DIR)/data
 	@mkdir -p $(OBJ_DIR)/bar
 
-# === Compile object files ===
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@ $(CLIBS)
 
-# === Debug Build ===
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: $(BIN_DIR)/$(EXECUTABLE)
 
-# === Release Build ===
 release: CFLAGS += $(RELEASE_FLAGS)
 release: $(BIN_DIR)/$(EXECUTABLE)
 
-# === Final Executable Link ===
 $(BIN_DIR)/$(EXECUTABLE): $(OBJS) | $(BIN_DIR)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(CLIBS)
 
-# === Unit Test Build ===
 test: $(BIN_DIR)/$(TEST_EXECUTABLE)
 
 $(BIN_DIR)/$(TEST_EXECUTABLE): $(SRCS) $(TEST_SRCS) test/test_globals.c | $(BIN_DIR)
@@ -74,12 +70,9 @@ $(BIN_DIR)/$(TEST_EXECUTABLE): $(SRCS) $(TEST_SRCS) test/test_globals.c | $(BIN_
 		-o $@ \
 		$(CTEST_LIBS)
 
-
-# === Clean Build Artifacts ===
 clean:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
-# === Convenience Targets ===
 run: debug
 	./runner.sh
 
