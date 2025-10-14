@@ -1,14 +1,9 @@
 #include "../../../include/x11_jobs.h"
-#include "../../../include/x11_helpers.h"
+#include "../../../include/x11_data.h"
 
 void
 kill_window ()
 {
-        x11_display *dp;
-
-        dp = x11_display_instance();
-
-        if (dp->current == NULL) return;
-
-        XKillClient(dp->display, dp->current->window->window);
+        if (dpy->current == NULL) return;
+        XKillClient(dpy->display, dpy->current->window->window);
 }
