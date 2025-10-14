@@ -6,27 +6,24 @@
 #include "../../../include/bar.h"
 #include "../../../include/x11_jobs.h"
 
-static void
+void
 handle_key (snfwm_screen *s)
 {
-        x11_display *dp;
         int revert;
         Window fwin;
         XEvent ev;
         
-        dp = x11_display_instance();
-
-        XGetInputFocus(dp->display, &fwin, &revert);
-        XSetInputFocus(dp->display, s->key_window, RevertToPointerRoot, CurrentTime);
-        XMaskEvent(dp->display, KeyPressMask, &ev);
-        XSetInputFocus(dp->display, fwin, revert, CurrentTime);
+        XGetInputFocus(dpy->display, &fwin, &revert);
+        XSetInputFocus(dpy->display, s->key_window, RevertToPointerRoot, CurrentTime);
+        XMaskEvent(dpy->display, KeyPressMask, &ev);
+        XSetInputFocus(dpy->display, fwin, revert, CurrentTime);
 
         if (XLookupKeysym((XKeyEvent *) &ev, 0) == KEY_PREFIX && !ev.xkey.state)
         {
                 ev.xkey.window = fwin;
                 ev.xkey.state = MODIFIER_PREFIX;
-                XSendEvent (dp->display, fwin, False, KeyPressMask, &ev);
-                XSync(dp->display, False);
+                XSendEvent (dpy->display, fwin, False, KeyPressMask, &ev);
+                XSync(dpy->display, False);
                 return;
         }
         if (XLookupKeysym((XKeyEvent *) &ev, 0) >= '0' 
@@ -66,7 +63,8 @@ handle_key (snfwm_screen *s)
         }
 }
 
-void keypress(const XEvent *event)
+void 
+keypress(const XEvent *event)
 {
         log_info("to implement");
         snfwm_screen *s;

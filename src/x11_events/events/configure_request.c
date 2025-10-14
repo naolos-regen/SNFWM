@@ -1,17 +1,16 @@
 #include "../../../include/x11_events.h"
 #include "../../../include/linkedlist.h"
-#include "../../../include/x11_helpers.h"
+#include "../../../include/x11_data.h"
 
-void configure_request(const XEvent *event)
+void 
+configure_request(const XEvent *event)
 {
         XConfigureRequestEvent *ev;
-        x11_display    *dp;
         XConfigureEvent ce;
         t_window_list   *w;
 
         ev = (XConfigureRequestEvent *) ev;
-        dp = x11_display_instance();
-        w  = list_find_window(dp->head, ev->window);
+        w  = list_find_window(dpy->head, ev->window);
 
         if (w)
         {
@@ -27,14 +26,14 @@ void configure_request(const XEvent *event)
                 ce.override_redirect = 0;
                 if (ev->value_mask & CWStackMode && w->window->state == STATE_MAPPED)
                 {
-                        dp->current = w;
-                        set_active_window(dp->current);
+                        dpy->current = w;
+                        set_active_window(dpy->current);
                 }
-                else if (ev->detail == Below && w == dp->current)
+                else if (ev->detail == Below && w == dpy->current)
                 {
                         last_window ();
                 }
 
-                XSendEvent(dp->display, w->window->window, False, SubstructureNotifyMask, (XEvent *)&ce);
+                XSendEvent(dpy->display, w->window->window, False, SubstructureNotifyMask, (XEvent *)&ce);
         }
 }

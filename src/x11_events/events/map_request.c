@@ -1,17 +1,17 @@
+#include "../../../include/x11_data.h"
 #include "../../../include/x11_events.h"
 #include "../../../include/x11_helpers.h"
 #include "../../../include/linkedlist.h"
 #include "../../../include/x11_jobs.h"
 #include "../../../include/logger.h"
 
-void map_request(const XEvent *event)
+void
+map_request(const XEvent *event)
 {
         log_info("I'm trying to map");
         snfwm_screen *scr;
         t_window_list *win;
-        x11_display  *dpy;
-
-        dpy = x11_display_instance ();
+        
         scr = find_screen (event->xmap.event);
         win = list_find_window (dpy->head, event->xmap.window);
         
