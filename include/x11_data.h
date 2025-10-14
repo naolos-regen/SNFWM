@@ -4,6 +4,8 @@
 #include <X11/Xlib.h>
 #include "common_structs.h"
 
+#define ERROR_BUFF_SIZE 256
+#define X_CHANGE_WINDOW_ATTRIBUTES 2
 
 extern x11_display      *dpy;
 extern XFontStruct      *font;
@@ -24,5 +26,6 @@ extern void initialize_font    ();
 extern void initialize_screens ();
 extern void initialize_atoms   ();
 extern void initialize_all     ();
+extern void setup_errors       ();
 
 #endif

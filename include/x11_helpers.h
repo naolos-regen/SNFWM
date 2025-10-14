@@ -12,7 +12,6 @@
 
 
 extern int x11_free ();
-extern int x11_error_handler (Display *display, const XErrorEvent *event);
 extern int x11_set_masks ();
 extern void x11_main_loop();
 extern snfwm_screen *find_screen(Window window);

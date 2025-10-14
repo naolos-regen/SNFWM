@@ -13,4 +13,6 @@ initialize_all()
         log_info("initialize_screens() went through");
         initialize_atoms   ();
         log_info("initialize_atoms() went through");
+        setup_errors       ();
+        log_info("setup_errors() went through");
 }
