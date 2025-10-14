@@ -1,10 +1,9 @@
-#include "../../include/x11_helpers.h"
 #include "../../include/x11_config.h"
+#include "../../include/x11_data.h"
 #include "../../include/bar.h"
 #include <stdio.h>
 
 #define FONT_HEIGHT(f) ((f)->max_bounds.ascent + (f)->max_bounds.descent)
-
 
 static size_t
 strlen(const char *str)
@@ -57,7 +56,6 @@ bar_y(snfwm_screen *scr)
 void
 update_window_names(snfwm_screen *s)
 {
-        x11_display *dpy = x11_display_instance();
         t_window_list *current;
         char str[100];
         int i;
