@@ -1,20 +1,17 @@
 #include "../../include/linkedlist.h"
-#include "../../include/x11_helpers.h"
+#include "../../include/x11_data.h"
 
 void
 next_window()
 {
-        x11_display *dp;
-
-        dp = x11_display_instance();
-        if (dp->current != NULL)
+        if (dpy->current != NULL)
         {
-                dp->current = dp->current->next;
-                if (dp->current == NULL)
+                dpy->current = dpy->current->next;
+                if (dpy->current == NULL)
                 {
-                        dp->current = dp->head;
+                        dpy->current = dpy->head;
                 }
-                if (dp->current->window->state == STATE_UNMAPPED) next_window ();
-                set_active_window (dp->current);
+                if (dpy->current->window->state == STATE_UNMAPPED) next_window ();
+                set_active_window (dpy->current);
         }
 }

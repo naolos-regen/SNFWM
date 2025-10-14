@@ -1,18 +1,15 @@
 #include "../../include/linkedlist.h"
-#include "../../include/x11_helpers.h"
+#include "../../include/x11_data.h"
 
 void
 goto_window_number (int n)
 {
-        x11_display *dp;
-
-        dp = x11_display_instance();
         t_window_list *win;
 
-        if ((win = list_at (dp->head, n)) == NULL)
+        if ((win = list_at (dpy->head, n)) == NULL)
         {
                 return;
         }
-        dp->current = win;
-        set_active_window(dp->current);
+        dpy->current = win;
+        set_active_window(dpy->current);
 }

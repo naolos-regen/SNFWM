@@ -1,6 +1,6 @@
 #include "../../include/linkedlist.h"
-#include "../../include/x11_helpers.h"
 #include "../../include/bar.h"
+#include "../../include/x11_data.h"
 
 void
 set_active_window (t_window_list *w)
@@ -13,9 +13,7 @@ set_active_window (t_window_list *w)
         w->window->last_access = counter;
 
         if (w->window->screen->bar_raised) update_window_names(w->window->screen);
-
-        x11_display *display = x11_display_instance();
-        XSetInputFocus(display->display, w->window->window,
+        XSetInputFocus(dpy->display, w->window->window,
                        RevertToPointerRoot, CurrentTime);
-        XRaiseWindow(display->display, w->window->window);
+        XRaiseWindow(dpy->display, w->window->window);
 }

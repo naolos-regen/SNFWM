@@ -1,14 +1,14 @@
 #include "../../include/linkedlist.h"
-#include "../../include/x11_helpers.h"
+#include "../../include/x11_data.h"
 
 static t_window_list *
-find_last_accessed_window (x11_display *dp)
+find_last_accessed_window ()
 {
         int last_access = 0;
         t_window_list *current;
         t_window_list *most_recent;
 
-        most_recent = dp->head;
+        most_recent = dpy->head;
         while (most_recent)
         {
                 if (most_recent->window->state == STATE_UNMAPPED) break;
@@ -16,11 +16,11 @@ find_last_accessed_window (x11_display *dp)
         }
         if (most_recent == NULL) return (NULL);
 
-        current = dp->head;
+        current = dpy->head;
         while (current)
         {
                 if (current->window->last_access >= last_access 
-                    && current != dp->current && current->window->state == STATE_MAPPED)
+                    && current != dpy->current && current->window->state == STATE_MAPPED)
                 {
                         most_recent = current;
                         last_access = current->window->last_access;
@@ -34,9 +34,6 @@ find_last_accessed_window (x11_display *dp)
 void
 last_window (void)
 {
-        x11_display *dp;
-
-        dp = x11_display_instance();
-        dp->current = find_last_accessed_window(dp);
-        set_active_window(dp->current);
+        dpy->current = find_last_accessed_window();
+        set_active_window(dpy->current);
 }
