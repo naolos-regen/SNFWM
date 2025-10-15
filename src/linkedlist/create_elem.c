@@ -1,4 +1,5 @@
 #include "../../include/linkedlist.h"
+#include "../../include/libx.h"
 #include <stdlib.h>
 
 t_window_list 
@@ -8,11 +9,8 @@ t_window_list
                 return (NULL);
         t_window_list *node;
 
-        node = malloc(sizeof(t_window_list));
-        if (!node)
-        {
-                return (NULL);
-        }
+        node = x_malloc(sizeof(t_window_list));
+        
         node->window = window;
         node->window->last_access = 0;
         node->next   = NULL;

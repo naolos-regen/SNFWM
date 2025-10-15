@@ -1,5 +1,6 @@
 #include "../../include/libx.h"
 
+
 void *
 x_malloc(size_t len)
 {
@@ -7,6 +8,6 @@ x_malloc(size_t len)
 
         ptr = malloc(len);
         if (!ptr)
-                x_exit(OUT_OF_MEMORY);
+                x_fatal(OUT_OF_MEMORY_MESSAGE, OUT_OF_MEMORY_ERRNO);
         return (ptr);
 }

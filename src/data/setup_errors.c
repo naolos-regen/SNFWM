@@ -8,7 +8,7 @@ void
 sighandler (int val)
 {
         log_fatal("I've been hit %d", val);
-        x_exit(1);
+        x_fatal("ERRROR", val);
 }
 
 void
@@ -40,11 +40,10 @@ x11_error_handler(Display *dp, XErrorEvent *ev)
         if (ev->request_code == X_CHANGE_WINDOW_ATTRIBUTES && ev->error_code == BadAccess)
         {
                 log_fatal("Only 1 instance please");
-                x_exit(1);
+                x_fatal("XLIB_ERROR", 1);
         }
         XGetErrorText(dp, ev->error_code, buff, ERROR_BUFF_SIZE);
         log_error("encountered: %s", buff);
-        x_exit(1);
 }
 
 void
