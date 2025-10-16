@@ -6,6 +6,7 @@
 void
 scan_windows(snfwm_screen *s)
 {
+        t_window_list *win;
         XWindowAttributes attr;
         unsigned int i, nwins;
         Window dw1, dw2, *wins;
@@ -18,9 +19,8 @@ scan_windows(snfwm_screen *s)
         {
                 XGetWindowAttributes(dpy->display, wins[i], &attr);
                 if (wins[i] == s->bar_window || wins[i] == s->key_window) continue;
-                
-                snfwm_window win = { .window = wins[i] };
-                list_push_prefix(&dpy->head, &win);
+                win = add_to_list(s, wins[i]);
+                manage(win->window, s);
         }
         XFree((void *) wins);
 }

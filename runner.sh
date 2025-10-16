@@ -1,5 +1,6 @@
 #!/bin/bash
 
+make clean
 time make debug 
 
 DISPLAY_NUM=:2
