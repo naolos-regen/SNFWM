@@ -20,7 +20,7 @@ scan_windows(snfwm_screen *s)
                 XGetWindowAttributes(dpy->display, wins[i], &attr);
                 if (wins[i] == s->bar_window || wins[i] == s->key_window) continue;
                 win = add_to_list(s, wins[i]);
-                manage(win->window, s);
+                manage(win, s);
         }
         XFree((void *) wins);
 }

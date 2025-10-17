@@ -22,4 +22,5 @@ spawn (char *prog)
                 exit(0);
         }
         wait((int *) 0);
+        log_info("spawned %s\n", prog);
 }
