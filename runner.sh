@@ -21,8 +21,6 @@ WM_PID=$!
 
 sleep 1
 
-alacritty &
-
 read -p "press to exit"
 
 kill $WM_PID

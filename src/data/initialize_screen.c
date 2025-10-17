@@ -1,7 +1,7 @@
 #include "../../include/x11_data.h"
-#include "../../include/logger.h"
 #include "../../include/x11_config.h"
 #include "../../include/x11_jobs.h"
+#include "../../include/logger.h"
 
 void
 initialize_screen (snfwm_screen *s, int screen_num)

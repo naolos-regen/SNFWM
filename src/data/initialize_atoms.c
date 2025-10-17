@@ -1,10 +1,8 @@
 #include "../../include/x11_data.h"
-#include "../../include/logger.h"
 
 void
 initialize_atoms (void)
 {
-        log_info("initializing all atoms");
         wm_state = XInternAtom(dpy->display, "WM_STATE", False);
         wm_change_state = XInternAtom(dpy->display, "WM_CHANGE_STATE", False);
         wm_protocols = XInternAtom(dpy->display, "WM_PROTOCOLS", False);
