@@ -7,5 +7,6 @@ int     hide_bar                (snfwm_screen *s);
 int     show_bar                (snfwm_screen *s);
 void    toggle_bar              (snfwm_screen *s);
 void    update_window_names     (snfwm_screen *s);
+int     update_window_name      (snfwm_window *w);
 
 #endif

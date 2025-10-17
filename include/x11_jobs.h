@@ -7,10 +7,11 @@
 extern void new_window   (t_window_list *w, const XCreateWindowEvent *e);
 extern void grab_keys    (struct s_screen *s);
 extern void scan_windows (struct s_screen *s);
-extern void manage       (struct s_window *w, struct s_screen *s);
+extern void manage       (t_window_list *w, struct s_screen *s);
 extern void spawn        (char *prog);
 extern void unmanage     (struct s_window *w);
 extern void delete_window(void);
 extern void kill_window  (void);
+extern void grab_prefix_key (Window w);
 
 #endif
