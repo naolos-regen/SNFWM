@@ -6,7 +6,7 @@ x_strlen (const char *s)
         const char *p;
 
         p = s;
-        while (*p != '\0')
+        while (*p)
                 p++;
         return (p - s);
 }

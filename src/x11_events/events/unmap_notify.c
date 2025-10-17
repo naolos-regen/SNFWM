@@ -16,7 +16,13 @@ unmap_notify(const XEvent *event)
         if (s && w)
         {
                 log_debug("both window and screen has been found");
-                w->window->state = STATE_UNMAPPED;
-                update_window_names (s);
+                if (w->window)
+                {
+                        w->window->state = STATE_UNMAPPED;
+                        update_window_names (s);
+                }
+                else 
+                        log_warn("null_pointer");
         }
+        log_debug("it's out?");
 }

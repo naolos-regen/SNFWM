@@ -25,8 +25,7 @@ calc_bar_width(XFontStruct *p)
         t_window_list *current;
 
         i = 0;
-        current = dpy->head;
-        while(current)
+        for(current = dpy->head; current != NULL; current = current->next)
         {
                 if (current->window->state == STATE_UNMAPPED) 
                         continue;
@@ -75,7 +74,7 @@ update_window_names(snfwm_screen *s)
         );
         XClearWindow(dpy->display, s->bar_window);
         XRaiseWindow(dpy->display, s->bar_window);
-
+        
         current = dpy->head;
         for (i = 0, current = dpy->head; current; current = current->next)
         {
@@ -83,6 +82,7 @@ update_window_names(snfwm_screen *s)
                 sprintf(str, "%d-%s", i, current->window->window_name);
                 size_t str_len = strlen(str);
                 if (dpy->current == current)
+                {
                         XDrawString
                         (
                                 dpy->display, 
@@ -93,7 +93,9 @@ update_window_names(snfwm_screen *s)
                                 str, 
                                 str_len
                         );
+                }
                 else 
+                {
                         XDrawString
                         (
                                 dpy->display,
@@ -104,7 +106,7 @@ update_window_names(snfwm_screen *s)
                                 str,
                                 str_len
                         );
-                
+                }
                 cur_x = cur_x + 10 + XTextWidth (s->font, str, str_len);
                 i++;
         }

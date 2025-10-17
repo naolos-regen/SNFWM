@@ -14,7 +14,7 @@
 #define KEY_TOGGLEBAR   'w'	
 #define KEY_DELETE      'k'	
 
-#define TERM_PROG       "xterm"	
+#define TERM_PROG       "alacritty"	
 #define EMACS_PROG      "emacs"	
 
 #define BAR_FG_COLOR    "Gray60"
