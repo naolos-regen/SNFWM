@@ -4,6 +4,7 @@ void (*handler[LASTEvent])(const XEvent *) =
 {
         [ButtonPress]           = buttonpress,
         [ClientMessage]         = client_message,
+        [CreateNotify]          = create_notify,
         [ConfigureRequest]      = configure_request,
         [ConfigureNotify]       = configure_notify,
         [DestroyNotify]         = destroy_notify,
