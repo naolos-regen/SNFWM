@@ -11,28 +11,25 @@ map_request(const XEvent *event)
         log_info("I'm trying to map");
         snfwm_screen *scr;
         t_window_list *win;
-        
+
         scr = find_screen (event->xmap.event);
         win = list_find_window (dpy->head, event->xmap.window);
-        
+
 
         if (scr && win)
         {
                 switch (win->window->state)
                 {
                 case STATE_UNMAPPED:
-                        manage(win->window, scr);
-                        break;
+                        manage(win, scr);
                 case STATE_MAPPED:
                         XMapRaised(dpy->display, win->window->window);
-                        dpy->current = dpy->head;
-                        set_active_window(dpy->head);
-                        break;
+                        dpy->current = win;
+                        set_active_window(dpy->current);
                 }
         }
         else 
         {
-                log_warn("unmanaged window");
                 XMapWindow(dpy->display, event->xmap.window);
         }
 }
