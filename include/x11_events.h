@@ -7,6 +7,7 @@ extern void (*handler[LASTEvent]) (const XEvent *);
 
 void buttonpress	(const XEvent *event);
 void client_message	(const XEvent *event);
+void create_notify      (const XEvent *event);
 void configure_request  (const XEvent *event);
 void configure_notify	(const XEvent *event);
 void destroy_notify	(const XEvent *event);
