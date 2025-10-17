@@ -16,4 +16,6 @@ set_active_window (t_window_list *w)
         XSetInputFocus(dpy->display, w->window->window,
                        RevertToPointerRoot, CurrentTime);
         XRaiseWindow(dpy->display, w->window->window);
+
+        update_window_names(w->window->screen);
 }

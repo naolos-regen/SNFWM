@@ -2,24 +2,15 @@
 #include <stdlib.h>
 
 static int
-sanity_check(t_window_list **begin_list, t_window_list *remove)
-{
-        if (!begin_list || !*begin_list || !remove)
-                return (-1);
-        return (1);
-}
-
-static int
 remove_node(t_window_list **begin_list, t_window_list *remove)
 {
-        if (sanity_check(begin_list, remove) == -1)
-                return (-1);
         if (remove->prev != NULL)
                 remove->prev->next = remove->next;
         else
                 *begin_list = remove->next;
         if (remove->next != NULL)
                 remove->next->prev = remove->prev;
+        free_node(remove);
         return (0);
 }
 

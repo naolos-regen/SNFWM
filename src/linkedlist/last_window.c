@@ -9,11 +9,8 @@ find_last_accessed_window ()
         t_window_list *most_recent;
 
         most_recent = dpy->head;
-        while (most_recent)
-        {
+        for (most_recent = dpy->head; most_recent; most_recent=most_recent->next)
                 if (most_recent->window->state == STATE_UNMAPPED) break;
-                most_recent = most_recent->next;
-        }
         if (most_recent == NULL) return (NULL);
 
         current = dpy->head;

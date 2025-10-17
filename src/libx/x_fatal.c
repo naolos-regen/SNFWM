@@ -6,5 +6,5 @@ void
 x_fatal (const char *message, const int errno)
 {
         log_fatal("%d : %s", errno, message);
-        abort ();
+        exit (errno);
 }
