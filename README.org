@@ -23,3 +23,5 @@
 ** Todos
 - I gotta stop thinking that globals are a bad thing.
 - I gotta stop wanting to generalize things that i only need for 1 useage.
+- fix bugs when killing a window & switching a window
+- fix bugs when bar-name changes / or get rid of it entirely (possibly going to use only 1 bar for switching windows on-click / when comboed with keys)
