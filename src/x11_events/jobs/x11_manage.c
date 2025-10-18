@@ -14,8 +14,11 @@ manage (t_window_list *win, snfwm_screen *scr)
 
         log_debug("============================================");
         log_debug("what the hell are the attrs width and height");
-        log_warn("The width: %d, & The height: %d", scr->attr_root.width, scr->attr_root.height);
+        log_debug("The width: %d, & The height: %d", scr->attr_root.width, scr->attr_root.height);
+        log_debug("the size of the list is: %d", dpy->list_size);
         log_debug("============================================");
+        
+
 
         XMoveResizeWindow(dpy->display, win->window->window, 0, 0, scr->attr_root.width, scr->attr_root.height);
         XSelectInput(dpy->display, win->window->window, PropertyChangeMask);

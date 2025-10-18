@@ -7,40 +7,23 @@
 void
 new_window (const XCreateWindowEvent *e)
 {
+        log_debug("create event hit");
+
+        snfwm_screen  *s;
+        t_window_list *w;
+
         if (e->override_redirect)
                 return;
 
-        snfwm_screen *scr = find_screen(e->parent);
-        if (!scr)
+        s = find_screen (e->parent);
+        w = list_find_window (dpy->head, e->window);
+        log_info("=================================================");
+        log_info("this is how many windows are now:              %d", dpy->list_size);
+        if (s && !w && e->window != s->key_window && e->window != s->bar_window)
         {
-                log_error("No screen found for parent window %lu", e->parent);
-                return;
+                w = add_to_list (s, e->window);
+                w->window->state = STATE_UNMAPPED;
         }
-
-        t_window_list *existing_win = list_find_window(dpy->head, e->window);
-        if (existing_win)
-        {
-                log_debug("Window %lu already in list", e->window);
-                return;
-        }
-
-        if (e->window == scr->key_window || e->window == scr->bar_window)
-        {
-                log_debug("Skipping special window %lu", e->window);
-                return;
-        }
-
-        t_window_list *new_win = add_to_list(scr, e->window);
-        if (new_win)
-        {
-                log_info("Added new window %lu to list", e->window);
-                if (new_win->window)
-                {
-                        new_win->window->state = STATE_UNMAPPED;
-                }
-        }
-        else
-        {
-                log_error("Failed to add window %lu to list", e->window);
-        }
+        log_info("this is how many are after the if statement:   %d", dpy->list_size);
+        log_info("=================================================");
 }
