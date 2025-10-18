@@ -5,48 +5,40 @@
 #include "../../../include/x11_jobs.h"
 #include "../../../include/logger.h"
 
+static void
+state_check (t_window_list *w, snfwm_screen *s)
+{
+        switch (w->window->state)
+        {
+                case STATE_UNMAPPED:
+                        manage(w, s);
+                        break;
+                case STATE_MAPPED:
+                        XMapRaised(dpy->display, w->window->window);
+                        dpy->current = w;
+                        set_active_window(dpy->current);
+                        break;
+                default:
+                        XMapWindow(dpy->display, w->window->window);
+        }
+}
+
 void
-map_request(const XEvent *event)
+map_request (const XEvent *event)
 {
         log_info("Map Request Received");
+        snfwm_screen *scr; 
+        t_window_list *win;
 
-        log_info("Window ID: %lu", event->xmap.window);
-        log_info("Event Window: %lu", event->xmap.event);
-
-        snfwm_screen *scr = find_screen(event->xmap.event);
-        t_window_list *win = list_find_window(dpy->head, event->xmap.window);
-
-        if (!scr)
+        scr = find_screen(event->xmap.event);
+        win = list_find_window(dpy->head, event->xmap.window);
+        
+        if (!scr || !win)
         {
                 log_error("No screen found for this window");
                 XMapWindow(dpy->display, event->xmap.window);
                 return;
         }
-
-        if (!win)
-        {
-                log_warn("Window not in managed list, force mapping");
-                XMapWindow(dpy->display, event->xmap.window);
-                return;
-        }
-
-        // Detailed state logging
-        log_info("Current Window State: %d", win->window->state);
-
-        switch (win->window->state)
-        {
-        case STATE_UNMAPPED:
-                log_info("Managing unmapped window");
-                manage(win, scr);
-                break;
-        case STATE_MAPPED:
-                log_info("Raising mapped window");
-                XMapRaised(dpy->display, win->window->window);
-                dpy->current = win;
-                set_active_window(dpy->current);
-                break;
-        default:
-                log_warn("Unexpected window state");
-                XMapWindow(dpy->display, event->xmap.window);
-        }
+        
+        state_check(win, scr);
 }
