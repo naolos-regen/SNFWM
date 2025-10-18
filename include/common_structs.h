@@ -45,6 +45,7 @@ struct x11_dp
 {
     Display *display;
     Window root;
+    int list_size;
     t_window_list *head, *tail;
     t_window_list *current;
     snfwm_screen  *screens;

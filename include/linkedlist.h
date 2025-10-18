@@ -16,7 +16,6 @@ int             list_size         (t_window_list *begin_list);
 int             list_is_empty     (t_window_list *begin_list);
 int             list_remove       (t_window_list **begin_list, snfwm_window *data_reference);
 
-
 void            list_foreach      (t_window_list *begin_list, void (*f)(snfwm_window *));
 void            list_reverse      (t_window_list **begin_list);
 
