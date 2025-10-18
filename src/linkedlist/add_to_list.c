@@ -6,7 +6,6 @@ t_window_list *
 add_to_list (snfwm_screen *s, Window w)
 {
         t_window_list *nw;
-        
         nw = x_malloc(sizeof(t_window_list));
         
         nw->window = x_malloc(sizeof(snfwm_window));
@@ -15,8 +14,7 @@ add_to_list (snfwm_screen *s, Window w)
         nw->window->last_access = 0;
         nw->window->window_name = x_malloc(x_strlen("Unnamed") + 1);
         x_strcpy(nw->window->window_name, "Unnamed");
-
-
+        
         if (NULL == dpy->head)
         {
                 dpy->head = nw;
@@ -27,5 +25,6 @@ add_to_list (snfwm_screen *s, Window w)
         nw->next = dpy->head;
         dpy->head->prev = nw;
         dpy->head = nw;
+        dpy->list_size = dpy->list_size + 1;
         return (nw);
 }

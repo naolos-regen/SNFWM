@@ -12,6 +12,7 @@ initialize_display (void)
         dpy->root = XDefaultRootWindow(dpy->display);
         dpy->head = NULL;
         dpy->tail = NULL;
+        dpy->list_size = 0;
         dpy->current = NULL;
         dpy->screens = NULL;
 }
