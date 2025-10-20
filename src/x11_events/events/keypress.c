@@ -5,17 +5,21 @@
 #include "../../../include/x11_config.h"
 #include "../../../include/x11_jobs.h"
 
-void
-handle_key (snfwm_screen *s)
+void 
+keypress(const XEvent *event)
 {
-        XEvent ev;
-        KeySym keysym;
+        log_info("to implement");
+        snfwm_screen *s;
+        KeySym ks;
+        unsigned int mod;
 
-        if (!XCheckMaskEvent(dpy->display, KeyPressMask, &ev))
-                return;
+        mod = event->xkey.state;
+        ks  = XLookupKeysym((XKeyEvent *)event, 0);
+        s   = find_screen(event->xkey.root);
 
-        keysym = XLookupKeysym((XKeyEvent *) &ev, 0);
-        switch (keysym)
+        if (!s || !(mod & MODIFIER_PREFIX)) return;
+
+        switch (ks)
         {
                 case KEY_XTERM:
                         spawn (TERM_PROG);
@@ -36,29 +40,11 @@ handle_key (snfwm_screen *s)
                         last_window();
                         break;
                 case KEY_DELETE:
-                        if (ev.xkey.state & ShiftMask) kill_window();
+                        if (event.xkey.state & ShiftMask) kill_window();
                         else delete_window();
                         break;
                 default:
                         log_warn("not handled");
                         break;
-        }
-}
-
-void 
-keypress(const XEvent *event)
-{
-        log_info("to implement");
-        snfwm_screen *s;
-        KeyCode ks;
-        unsigned int mod;
-
-        mod = event->xkey.state;
-        ks = XLookupKeysym((XKeyEvent *) event, 0);
-        s  = find_screen(event->xkey.root);
-
-        if (s && ks == KEY_PREFIX && (mod & MODIFIER_PREFIX))
-        {
-                handle_key (s);
         }
 }
