@@ -1,6 +1,5 @@
 #include "../../../include/x11_jobs.h"
 #include "../../../include/logger.h"
-#include "../../../include/bar.h"
 #include "../../../include/x11_data.h"
 
 #include <X11/Xutil.h>
@@ -8,9 +7,7 @@
 void
 manage (t_window_list *win, snfwm_screen *scr)
 {
-        if (!update_window_name (win->window)) return;
-
-        XMapWindow (dpy->display, win->window->window);
+        XMapWindow (dpy->display, win->window);
 
         log_debug("============================================");
         log_debug("what the hell are the attrs width and height");
@@ -18,13 +15,11 @@ manage (t_window_list *win, snfwm_screen *scr)
         log_debug("the size of the list is: %d", dpy->list_size);
         log_debug("============================================");
         
+        XMoveResizeWindow(dpy->display, win->window, 0, 0, scr->attr_root.width, scr->attr_root.height);
+        XSelectInput(dpy->display, win->window, PropertyChangeMask);
+        XAddToSaveSet(dpy->display, win->window);
+        grab_prefix_key (win->window);
 
-
-        XMoveResizeWindow(dpy->display, win->window->window, 0, 0, scr->attr_root.width, scr->attr_root.height);
-        XSelectInput(dpy->display, win->window->window, PropertyChangeMask);
-        XAddToSaveSet(dpy->display, win->window->window);
-        grab_prefix_key (win->window->window);
-
-        win->window->state = STATE_MAPPED;
+        win->state = STATE_MAPPED;
 }
  

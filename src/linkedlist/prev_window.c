@@ -11,7 +11,7 @@ prev_window()
                 {
                         dpy->current = dpy->tail;
                 }
-                if (dpy->current->window->state == STATE_UNMAPPED) prev_window();
+                if (dpy->current->state == STATE_UNMAPPED) prev_window();
                 set_active_window(dpy->current);
         }
 }

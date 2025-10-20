@@ -1,7 +1,6 @@
 #include "../../include/x11_data.h"
 #include "../../include/logger.h"
 #include "../../include/libx.h"
-#include "../../include/bar.h"
 #include <signal.h>
 
 void
@@ -21,14 +20,7 @@ void
 alarm_handler (int val)
 {
         log_info("we don't care about %d", val);
-        int i;
 
-        i = 0;
-        while (i < num_screens)
-        {
-                hide_bar(&dpy->screens[i]);
-                i++;
-        }
         XSync(dpy->display, False);
 }
 

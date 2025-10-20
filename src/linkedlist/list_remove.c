@@ -15,19 +15,19 @@ remove_node(t_window_list **begin_list, t_window_list *remove)
 }
 
 int
-list_remove(t_window_list **begin_list, snfwm_window *data)
+list_remove(t_window_list **begin_list, t_window_list *w)
 {
         t_window_list *current;
         t_window_list *next;
 
-        if (!begin_list || !*begin_list || !data)
+        if (!begin_list || !*begin_list || !w)
                 return (-1);
         
         current = *begin_list;
         while (current)
         {
                 next = current->next;
-                if (comparator(data, current->window) == 0)
+                if (comparator(w, current) == 0)
                        remove_node(begin_list, current);
                 current = next;
         }

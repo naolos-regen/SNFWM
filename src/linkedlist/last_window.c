@@ -10,17 +10,17 @@ find_last_accessed_window ()
 
         most_recent = dpy->head;
         for (most_recent = dpy->head; most_recent; most_recent=most_recent->next)
-                if (most_recent->window->state == STATE_UNMAPPED) break;
+                if (most_recent->state == STATE_UNMAPPED) break;
         if (most_recent == NULL) return (NULL);
 
         current = dpy->head;
         while (current)
         {
-                if (current->window->last_access >= last_access 
-                    && current != dpy->current && current->window->state == STATE_MAPPED)
+                if (current->last_access >= last_access 
+                    && current != dpy->current && current->state == STATE_MAPPED)
                 {
                         most_recent = current;
-                        last_access = current->window->last_access;
+                        last_access = current->last_access;
                 }
                 current = current->next;
         }

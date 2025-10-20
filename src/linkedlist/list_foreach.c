@@ -1,7 +1,7 @@
 #include "../../include/linkedlist.h"
 
 void
-list_foreach(t_window_list *begin_list, void (*f)(snfwm_window *))
+list_foreach(t_window_list *begin_list, void (*f)(t_window_list *))
 {
         t_window_list *p;
 
@@ -9,7 +9,7 @@ list_foreach(t_window_list *begin_list, void (*f)(snfwm_window *))
         while (p != NULL)
         {
                 if (p->window)
-                        f(p->window);
+                        f(p);
                 p = p->next;
         }
 }

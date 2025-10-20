@@ -3,7 +3,6 @@
 #include "../../../include/logger.h"
 #include "../../../include/x11_helpers.h"
 #include "../../../include/x11_config.h"
-#include "../../../include/bar.h"
 #include "../../../include/x11_jobs.h"
 
 void
@@ -48,7 +47,7 @@ handle_key (snfwm_screen *s)
                         next_window();
                         break;
                 case KEY_TOGGLEBAR:
-                        toggle_bar (s);
+                        log_warn("no toggle");
                         break;
                 case KEY_LASTWINDOW:
                         last_window();

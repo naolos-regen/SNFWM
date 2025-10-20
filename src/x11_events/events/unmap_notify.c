@@ -1,5 +1,5 @@
+#include "../../../include/logger.h"
 #include "../../../include/x11_events.h"
-#include "../../../include/bar.h"
 #include "../../../include/linkedlist.h"
 #include "../../../include/x11_helpers.h"
 
@@ -16,8 +16,8 @@ unmap_notify(const XEvent *event)
         {
                 if (w->window)
                 {
-                        w->window->state = STATE_UNMAPPED;
-                        update_window_names (s);
+                        w->state = STATE_UNMAPPED;
+                        log_debug("no window update");
                 }
         }
 }

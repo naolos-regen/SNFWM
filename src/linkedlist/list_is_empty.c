@@ -1,7 +1,8 @@
 #include "../../include/linkedlist.h"
+#include "../../include/x11_data.h"
 
 int
-list_is_empty(t_window_list *begin_list)
+list_is_empty()
 {
-        return list_size(begin_list) == 0;
+        return (dpy->list_size <= 0);
 }

@@ -21,13 +21,13 @@ configure_request(const XEvent *event)
                 ce.window = ev->window;
                 ce.x = 0;
                 ce.y = 0;
-                ce.width = w->window->screen->attr_root.width;
-                ce.height = w->window->screen->attr_root.height;
+                ce.width = w->screen->attr_root.width;
+                ce.height = w->screen->attr_root.height;
                 ce.border_width = 0;
                 ce.above = None;
                 ce.override_redirect = 0;
                 log_warn("we applied all the Configurations");
-                if (ev->value_mask & CWStackMode && w->window->state == STATE_MAPPED)
+                if (ev->value_mask & CWStackMode && w->state == STATE_MAPPED)
                 {
                         log_warn("applied current");
                         dpy->current = w;
@@ -42,6 +42,6 @@ configure_request(const XEvent *event)
                 log_warn("applied either");
 
                 log_warn("sending event");
-                XSendEvent(dpy->display, w->window->window, False, SubstructureNotifyMask, (XEvent *)&ce);
+                XSendEvent(dpy->display, w->window, False, SubstructureNotifyMask, (XEvent *)&ce);
         }
 }

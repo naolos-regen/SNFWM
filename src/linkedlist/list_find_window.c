@@ -8,7 +8,7 @@ t_window_list
         current = begin_list;
         while (current != NULL)
         {
-                if (current->window != NULL && current->window->window == window)
+                if (current != NULL && current->window == window)
                         return (current);       
                 current = current->next;
         }

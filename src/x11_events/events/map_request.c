@@ -8,18 +8,18 @@
 static void
 state_check (t_window_list *w, snfwm_screen *s)
 {
-        switch (w->window->state)
+        switch (w->state)
         {
                 case STATE_UNMAPPED:
                         manage(w, s);
                         break;
                 case STATE_MAPPED:
-                        XMapRaised(dpy->display, w->window->window);
+                        XMapRaised(dpy->display, w->window);
                         dpy->current = w;
                         set_active_window(dpy->current);
                         break;
                 default:
-                        XMapWindow(dpy->display, w->window->window);
+                        XMapWindow(dpy->display, w->window);
         }
 }
 

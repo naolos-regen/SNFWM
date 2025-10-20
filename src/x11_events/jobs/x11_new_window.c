@@ -19,10 +19,10 @@ new_window (const XCreateWindowEvent *e)
         w = list_find_window (dpy->head, e->window);
         log_info("=================================================");
         log_info("this is how many windows are now:              %d", dpy->list_size);
-        if (s && !w && e->window != s->key_window && e->window != s->bar_window)
+        if (s && !w && e->window != s->key_window)
         {
                 w = add_to_list (s, e->window);
-                w->window->state = STATE_UNMAPPED;
+                w->state = STATE_UNMAPPED;
         }
         log_info("this is how many are after the if statement:   %d", dpy->list_size);
         log_info("=================================================");

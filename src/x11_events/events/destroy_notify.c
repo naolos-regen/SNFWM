@@ -17,7 +17,7 @@ destroy_notify(const XEvent *event)
     if (s && w)
     {
         log_debug("time to destroy a window");
-        if (w->window->state == STATE_UNMAPPED) last_window ();
-        unmanage(w->window);
+        if (w->state == STATE_UNMAPPED) last_window ();
+        unmanage(w);
     }
 }

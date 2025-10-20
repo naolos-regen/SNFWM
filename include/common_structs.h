@@ -6,18 +6,11 @@
 
 #define x11_display     struct x11_dp
 #define snfwm_screen    struct s_screen
-#define snfwm_window    struct s_window
 
 #define STATE_UNMAPPED  0
 #define STATE_MAPPED    1
 
 
-typedef struct s_window_list
-{
-        snfwm_window *window;
-        struct s_window_list *prev;
-        struct s_window_list *next;
-} t_window_list;
 
 
 struct s_screen
@@ -26,20 +19,21 @@ struct s_screen
     GC bold_gc;
     XFontStruct *font;
     XWindowAttributes attr_root;
-    Window root, bar_window, key_window;
+    Window root, key_window;
     int bar_raised;
     int screen_num;
     Colormap def_cmap;
 };
 
-struct s_window
+typedef struct s_window_list
 {
-    struct s_screen *screen;
-    Window window;
-    char *window_name;
-    int state;
-    int last_access;
-};
+        Window window;
+        int state;
+        int last_access;
+        snfwm_screen *screen;
+        struct s_window_list *prev;
+        struct s_window_list *next;
+} t_window_list;
 
 struct x11_dp
 {

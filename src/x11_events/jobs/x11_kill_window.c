@@ -5,5 +5,5 @@ void
 kill_window (void)
 {
         if (dpy->current == NULL) return;
-        XKillClient(dpy->display, dpy->current->window->window);
+        XKillClient(dpy->display, dpy->current->window);
 }

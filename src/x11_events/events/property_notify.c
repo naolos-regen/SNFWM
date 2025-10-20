@@ -2,7 +2,6 @@
 #include "../../../include/logger.h"
 #include "../../../include/linkedlist.h"
 #include "../../../include/x11_data.h"
-#include "../../../include/bar.h"
 
 #include <X11/Xatom.h>
 
@@ -18,7 +17,6 @@ property_notify(const XEvent *event)
                 if (event->xproperty.atom == XA_WM_NAME)
                 {
                         log_debug("updating window_name\n");
-                        update_window_name (win->window);
                 }
         }
 }

@@ -12,13 +12,13 @@ scan_windows(snfwm_screen *s)
         Window dw1, dw2, *wins;
 
         XQueryTree(dpy->display, dpy->root, &dw1, &dw2, &wins, &nwins);
-        i = 0;
         log_warn("%d length of wins", nwins);
 
+        i = 0;
         for (;i < nwins; i++)
         {
                 XGetWindowAttributes(dpy->display, wins[i], &attr);
-                if (wins[i] == s->bar_window || wins[i] == s->key_window) continue;
+                if (wins[i] == s->key_window) continue;
                 win = add_to_list(s, wins[i]);
                 manage(win, s);
         }
