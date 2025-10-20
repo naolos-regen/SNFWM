@@ -36,9 +36,6 @@ initialize_screen (snfwm_screen *s, int screen_num)
         XSync(dpy->display, 0);
 
         s->bar_raised = 0;
-        s->key_window = XCreateSimpleWindow (dpy->display, dpy->root, 0, 0, 1, 1, 0, WhitePixel (dpy->display, 0), BlackPixel(dpy->display, 0));
-
-        XMapWindow (dpy->display, s->key_window);
         
         grab_keys (s);
         scan_windows (s);

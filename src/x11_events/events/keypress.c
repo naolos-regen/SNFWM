@@ -13,7 +13,7 @@ handle_key (snfwm_screen *s)
         XEvent ev;
         
         XGetInputFocus(dpy->display, &fwin, &revert);
-        XSetInputFocus(dpy->display, s->key_window, RevertToPointerRoot, CurrentTime);
+        XSetInputFocus(dpy->display, s->root, RevertToPointerRoot, CurrentTime);
         XMaskEvent(dpy->display, KeyPressMask, &ev);
         XSetInputFocus(dpy->display, fwin, revert, CurrentTime);
 
