@@ -25,7 +25,7 @@ int ft_strcmp(const char *str1, const char *str2)
  * other way is to also compare title_names
  */
 int
-comparator(const t_window_list *w1, const t_window_list *w2)
+comparator(const snfwm_window *w1, const snfwm_window *w2)
 {
         if (w1->window < w2->window)
                 return (-1);

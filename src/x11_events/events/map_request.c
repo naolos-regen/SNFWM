@@ -6,7 +6,7 @@
 #include "../../../include/logger.h"
 
 static void
-state_check (t_window_list *w, snfwm_screen *s)
+state_check (snfwm_window *w, snfwm_screen *s)
 {
         switch (w->state)
         {
@@ -28,7 +28,7 @@ map_request (const XEvent *event)
 {
         log_info("Map Request Received");
         snfwm_screen *scr; 
-        t_window_list *win;
+        snfwm_window *win;
 
         scr = find_screen(event->xmap.event);
         win = list_find_window(dpy->head, event->xmap.window);

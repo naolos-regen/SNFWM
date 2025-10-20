@@ -2,7 +2,7 @@
 #include "../../include/x11_data.h"
 
 static int
-sanity_check (t_window_list *w)
+sanity_check (snfwm_window *w)
 {
         if (!w)
                 return (-1);
@@ -12,7 +12,7 @@ sanity_check (t_window_list *w)
 }
 
 static void
-update_window (t_window_list *w, XWindowAttributes *attrs)
+update_window (snfwm_window *w, XWindowAttributes *attrs)
 {
         if (attrs->map_state == IsViewable && !attrs->override_redirect)
         {
@@ -24,7 +24,7 @@ update_window (t_window_list *w, XWindowAttributes *attrs)
 }
 
 void
-set_active_window (t_window_list *w)
+set_active_window (snfwm_window *w)
 {
         static int counter = 1;
         XWindowAttributes attrs;

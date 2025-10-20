@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 void
-free_node (t_window_list *node)
+free_node (snfwm_window *node)
 {
         if (!node)
                 return;

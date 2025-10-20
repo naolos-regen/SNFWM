@@ -19,8 +19,7 @@ SRCS             = $(wildcard $(SRC_DIR)/*.c) \
 		   $(wildcard $(SRC_DIR)/x11_events/jobs/*.c) \
 		   $(wildcard $(SRC_DIR)/x11_events/events/*c) \
 		   $(wildcard $(SRC_DIR)/data/*.c) \
-		   $(wildcard $(SRC_DIR)/libx/*.c) \
-		   $(wildcard $(SRC_DIR)/bar/*.c)
+		   $(wildcard $(SRC_DIR)/libx/*.c)
 
 OBJS             = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
 
@@ -41,7 +40,6 @@ $(OBJ_DIR) $(BIN_DIR):
 	@mkdir -p $(OBJ_DIR)/x11_events/jobs
 	@mkdir -p $(OBJ_DIR)/x11_events/events
 	@mkdir -p $(OBJ_DIR)/data
-	@mkdir -p $(OBJ_DIR)/bar
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
 	@mkdir -p $(dir $@)

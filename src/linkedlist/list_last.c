@@ -1,9 +1,9 @@
 #include "../../include/linkedlist.h"
 
-t_window_list 
-*list_last (t_window_list *begin_list)
+snfwm_window 
+*list_last (snfwm_window *begin_list)
 {
-        t_window_list *node;
+        snfwm_window *node;
 
         node = begin_list;
         while (node != NULL)

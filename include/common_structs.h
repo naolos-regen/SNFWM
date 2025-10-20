@@ -10,9 +10,6 @@
 #define STATE_UNMAPPED  0
 #define STATE_MAPPED    1
 
-
-
-
 struct s_screen
 {
     GC gc_normal;
@@ -25,23 +22,23 @@ struct s_screen
     Colormap def_cmap;
 };
 
-typedef struct s_window_list
+typedef struct s_window
 {
         Window window;
         int state;
         int last_access;
         snfwm_screen *screen;
-        struct s_window_list *prev;
-        struct s_window_list *next;
-} t_window_list;
+        struct s_window *prev;
+        struct s_window *next;
+} snfwm_window;
 
 struct x11_dp
 {
     Display *display;
     Window root;
     int list_size;
-    t_window_list *head, *tail;
-    t_window_list *current;
+    snfwm_window *head, *tail;
+    snfwm_window *current;
     snfwm_screen  *screens;
 };
 

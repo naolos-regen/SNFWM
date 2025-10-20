@@ -2,13 +2,13 @@
 #include <stdlib.h>
 
 void
-free_list(t_window_list **begin_list)
+free_list(snfwm_window **begin_list)
 {
         if (!begin_list || !*begin_list)
                 return;
 
-        t_window_list *current = *begin_list;
-        t_window_list *next;
+        snfwm_window *current = *begin_list;
+        snfwm_window *next;
 
         while (current)
         {

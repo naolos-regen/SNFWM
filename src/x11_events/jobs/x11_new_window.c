@@ -10,7 +10,7 @@ new_window (const XCreateWindowEvent *e)
         log_debug("create event hit");
 
         snfwm_screen  *s;
-        t_window_list *w;
+        snfwm_window *w;
 
         if (e->override_redirect)
                 return;

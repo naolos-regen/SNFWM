@@ -8,7 +8,7 @@ configure_request(const XEvent *event)
 {
         XConfigureRequestEvent *ev;
         XConfigureEvent ce;
-        t_window_list   *w;
+        snfwm_window   *w;
 
         ev = (XConfigureRequestEvent *) event;
         log_warn("we try to find the window from event");

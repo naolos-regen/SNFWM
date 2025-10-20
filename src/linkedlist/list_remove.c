@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 static int
-remove_node(t_window_list **begin_list, t_window_list *remove)
+remove_node(snfwm_window **begin_list, snfwm_window *remove)
 {
         if (remove->prev != NULL)
                 remove->prev->next = remove->next;
@@ -15,10 +15,10 @@ remove_node(t_window_list **begin_list, t_window_list *remove)
 }
 
 int
-list_remove(t_window_list **begin_list, t_window_list *w)
+list_remove(snfwm_window **begin_list, snfwm_window *w)
 {
-        t_window_list *current;
-        t_window_list *next;
+        snfwm_window *current;
+        snfwm_window *next;
 
         if (!begin_list || !*begin_list || !w)
                 return (-1);

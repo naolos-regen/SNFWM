@@ -9,7 +9,7 @@ void
 destroy_notify(const XEvent *event)
 {
     snfwm_screen *s;
-    t_window_list *w;
+    snfwm_window *w;
 
     s  = find_screen(event->xdestroywindow.window);
     w  = list_find_window(dpy->head, event->xdestroywindow.window);

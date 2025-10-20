@@ -1,13 +1,13 @@
 #include "../../include/linkedlist.h"
 
-t_window_list 
-*list_at (t_window_list *begin_list, unsigned int n)
+snfwm_window 
+*list_at (snfwm_window *begin_list, unsigned int n)
 {
         if (!begin_list)
                 return NULL;
         
         unsigned int index;
-        t_window_list *p;
+        snfwm_window *p;
         
         index = 0;
         p = begin_list;

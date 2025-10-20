@@ -3,7 +3,7 @@
 #include "../../../include/x11_data.h"
 
 void
-unmanage(t_window_list *w)
+unmanage(snfwm_window *w)
 {
         list_remove(&dpy->head, w);
 }

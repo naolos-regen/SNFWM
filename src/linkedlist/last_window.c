@@ -1,12 +1,12 @@
 #include "../../include/linkedlist.h"
 #include "../../include/x11_data.h"
 
-static t_window_list *
+static snfwm_window *
 find_last_accessed_window ()
 {
         int last_access = 0;
-        t_window_list *current;
-        t_window_list *most_recent;
+        snfwm_window *current;
+        snfwm_window *most_recent;
 
         most_recent = dpy->head;
         for (most_recent = dpy->head; most_recent; most_recent=most_recent->next)

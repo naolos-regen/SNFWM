@@ -5,7 +5,7 @@
 #include <X11/Xutil.h>
 
 void
-manage (t_window_list *win, snfwm_screen *scr)
+manage (snfwm_window *win, snfwm_screen *scr)
 {
         XMapWindow (dpy->display, win->window);
 

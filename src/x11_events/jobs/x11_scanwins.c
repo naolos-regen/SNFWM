@@ -6,7 +6,7 @@
 void
 scan_windows(snfwm_screen *s)
 {
-        t_window_list *win;
+        snfwm_window *win;
         XWindowAttributes attr;
         unsigned int i, nwins;
         Window dw1, dw2, *wins;

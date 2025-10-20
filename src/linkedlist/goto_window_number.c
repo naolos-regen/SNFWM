@@ -4,7 +4,7 @@
 void
 goto_window_number (int n)
 {
-        t_window_list *win;
+        snfwm_window *win;
 
         if ((win = list_at (dpy->head, n)) == NULL)
         {

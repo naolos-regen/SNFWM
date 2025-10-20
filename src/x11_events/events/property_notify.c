@@ -8,7 +8,7 @@
 void
 property_notify(const XEvent *event)
 {
-        t_window_list *win;
+        snfwm_window *win;
 
         win = list_find_window(dpy->head, event->xproperty.window);
 

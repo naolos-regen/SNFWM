@@ -6,7 +6,7 @@
 
 
 void
-print_out_infos(t_window_list *w)
+print_out_infos(snfwm_window *w)
 {
         log_debug("=================================================================");
         log_debug("Window Pointer is equal to:           %p", w);

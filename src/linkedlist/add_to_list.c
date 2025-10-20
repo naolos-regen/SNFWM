@@ -2,11 +2,11 @@
 #include "../../include/libx.h"
 #include "../../include/x11_data.h"
 
-t_window_list *
+snfwm_window *
 add_to_list (snfwm_screen *s, Window w)
 {
-        t_window_list *nw;
-        nw = x_malloc(sizeof(t_window_list));
+        snfwm_window *nw;
+        nw = x_malloc(sizeof(snfwm_window));
         
         nw->window = w;
         nw->window = w;
