@@ -40,7 +40,7 @@ keypress(const XEvent *event)
                         last_window();
                         break;
                 case KEY_DELETE:
-                        if (event.xkey.state & ShiftMask) kill_window();
+                        if (event->xkey.state & ShiftMask) kill_window();
                         else delete_window();
                         break;
                 default:

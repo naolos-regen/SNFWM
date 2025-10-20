@@ -31,5 +31,4 @@ grab_keys (snfwm_screen *s)
         grab_key(s, KEY_TOGGLEBAR);
         grab_key(s, KEY_LASTWINDOW);
         grab_key(s, KEY_DELETE);
-        grab_key(s, KEY_PREFIX);
 }
