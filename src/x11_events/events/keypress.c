@@ -8,31 +8,14 @@
 void
 handle_key (snfwm_screen *s)
 {
-        int revert;
-        Window fwin;
         XEvent ev;
-        
-        XGetInputFocus(dpy->display, &fwin, &revert);
-        XSetInputFocus(dpy->display, s->root, RevertToPointerRoot, CurrentTime);
-        XMaskEvent(dpy->display, KeyPressMask, &ev);
-        XSetInputFocus(dpy->display, fwin, revert, CurrentTime);
+        KeySym keysym;
 
-        if (XLookupKeysym((XKeyEvent *) &ev, 0) == KEY_PREFIX && !ev.xkey.state)
-        {
-                ev.xkey.window = fwin;
-                ev.xkey.state = MODIFIER_PREFIX;
-                XSendEvent (dpy->display, fwin, False, KeyPressMask, &ev);
-                XSync(dpy->display, False);
+        if (!XCheckMaskEvent(dpy->display, KeyPressMask, &ev))
                 return;
-        }
-        if (XLookupKeysym((XKeyEvent *) &ev, 0) >= '0' 
-            && XLookupKeysym((XKeyEvent *) &ev, 0) <= '9')
-        {
-                goto_window_number (XLookupKeysym((XKeyEvent *) &ev, 0) - '0');
-                return;
-        }
 
-        switch (XLookupKeysym((XKeyEvent *) &ev, 0))
+        keysym = XLookupKeysym((XKeyEvent *) &ev, 0);
+        switch (keysym)
         {
                 case KEY_XTERM:
                         spawn (TERM_PROG);
