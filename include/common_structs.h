@@ -16,7 +16,7 @@ struct s_screen
     GC bold_gc;
     XFontStruct *font;
     XWindowAttributes attr_root;
-    Window root;
+    Window root, key_window;
     int bar_raised;
     int screen_num;
     Colormap def_cmap;
