@@ -24,6 +24,7 @@ grab_keys (snfwm_screen *s)
                 grab_key(s, (char) i);
                 i++;
         }
+        grab_key(s, KEY_PREFIX);
         grab_key(s, KEY_XTERM);
         grab_key(s, KEY_EMACS);
         grab_key(s, KEY_PREVWINDOW);

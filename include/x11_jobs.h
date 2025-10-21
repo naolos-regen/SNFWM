@@ -12,5 +12,6 @@ extern void spawn        (char *prog);
 extern void unmanage     (snfwm_window *w);
 extern void delete_window(void);
 extern void kill_window  (void);
+extern void grab_prefix_key (Window w);
 
 #endif

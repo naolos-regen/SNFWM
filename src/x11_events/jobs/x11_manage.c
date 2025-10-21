@@ -18,6 +18,8 @@ manage (snfwm_window *win, snfwm_screen *scr)
         XMoveResizeWindow(dpy->display, win->window, 0, 0, scr->attr_root.width, scr->attr_root.height);
         XSelectInput(dpy->display, win->window, PropertyChangeMask);
         XAddToSaveSet(dpy->display, win->window);
+        grab_prefix_key(win->window);
+
 
         win->state = STATE_MAPPED;
 }

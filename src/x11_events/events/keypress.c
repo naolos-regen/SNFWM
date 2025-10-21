@@ -5,6 +5,8 @@
 #include "../../../include/x11_config.h"
 #include "../../../include/x11_jobs.h"
 
+#include <stdio.h>
+
 void
 handle_key (snfwm_screen *s)
 {
@@ -16,6 +18,20 @@ handle_key (snfwm_screen *s)
         XSetInputFocus(dpy->display, s->key_window, RevertToPointerRoot, CurrentTime);
         XMaskEvent(dpy->display, KeyPressMask, &ev);
         XSetInputFocus(dpy->display, fwin, revert, CurrentTime);
+
+        if (XLookupKeysym((XKeyEvent *)&ev, 0) == KEY_PREFIX && !ev.xkey.state)
+        {
+                ev.xkey.window = fwin;
+                ev.xkey.state = MODIFIER_PREFIX;
+                XSendEvent(dpy->display, fwin, False, KeyPressMask, &ev);
+                XSync(dpy->display, False);
+                return;
+        }
+        if (XLookupKeysym((XKeyEvent *)&ev, 0) >= '0' && XLookupKeysym((XKeyEvent *)&ev, 0) <= '9')
+        {
+                goto_window_number (XLookupKeysym((XKeyEvent *)&ev, 0) - '0');
+                return;
+        }
         
         switch (XLookupKeysym((XKeyEvent *)&ev, 0))
         {
@@ -55,11 +71,15 @@ keypress(const XEvent *event)
         log_info("to implement");
         snfwm_screen *s;
         unsigned int mod;
+        KeyCode ks;
 
         mod = event->xkey.state;
         s   = find_screen(event->xkey.root);
+        ks  = XLookupKeysym((XKeyEvent *) event, 0);
 
-        if (!s || !(mod & MODIFIER_PREFIX)) return;
-        
-        handle_key (s);
+        if (s && ks == KEY_PREFIX && (mod & MODIFIER_PREFIX))
+        {
+                handle_key (s);
+
+        }
 }
