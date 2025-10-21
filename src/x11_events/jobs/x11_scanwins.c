@@ -18,7 +18,7 @@ scan_windows(snfwm_screen *s)
         for (;i < nwins; i++)
         {
                 XGetWindowAttributes(dpy->display, wins[i], &attr);
-                if (win[i] == s->key_window)
+                if (wins[i] == s->key_window)
                     continue;
                 win = add_to_list(s, wins[i]);
                 manage(win, s);
