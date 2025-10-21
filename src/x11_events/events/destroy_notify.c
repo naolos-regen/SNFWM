@@ -13,10 +13,15 @@ destroy_notify(const XEvent *event)
 
     s  = find_screen(event->xdestroywindow.window);
     w  = list_find_window(dpy->head, event->xdestroywindow.window);
-
+    
     if (s && w)
     {
         log_debug("time to destroy a window");
+        if (w->window == dpy->root)
+        {
+            log_info("dpy->root is equal to w->window");
+            return;
+        }
         if (w->state == STATE_UNMAPPED) last_window ();
         unmanage(w);
     }

@@ -24,6 +24,7 @@
 - I gotta stop thinking that globals are a bad thing.
 - I gotta stop wanting to generalize things that i only need for 1 useage.
 - fix bugs when killing a window & switching a window
+- fix keys bugs
 - add 1 bar that will indicate how many windows there are in the stack.
 - add possibility to change windows according to their numbers in stack.
 - add multiple workspaces

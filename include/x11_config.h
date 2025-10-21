@@ -3,15 +3,18 @@
 
 #include <X11/keysym.h>
 
-#define KEY_PREFIX      't'
+#define MODIFIER_PREFIX_REV Mod4Mask
+
 #define MODIFIER_PREFIX ControlMask
+#define KEY_PREFIX      't'
+
 
 #define KEY_XTERM       'c'
 #define KEY_EMACS       'e'
 #define KEY_PREVWINDOW  'p'
-#define KEY_NEXTWINDOW  'n'	
+#define KEY_NEXTWINDOW  'n'
 #define KEY_LASTWINDOW  't'	
-#define KEY_TOGGLEBAR   'w'	
+#define KEY_TOGGLEBAR   'w'
 #define KEY_DELETE      'k'	
 
 #define TERM_PROG       "alacritty"	

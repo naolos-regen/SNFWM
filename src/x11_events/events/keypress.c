@@ -5,34 +5,35 @@
 #include "../../../include/x11_config.h"
 #include "../../../include/x11_jobs.h"
 
+#include <stdio.h>
+
 void
 handle_key (snfwm_screen *s)
 {
         int revert;
         Window fwin;
         XEvent ev;
-        
+
         XGetInputFocus(dpy->display, &fwin, &revert);
         XSetInputFocus(dpy->display, s->key_window, RevertToPointerRoot, CurrentTime);
         XMaskEvent(dpy->display, KeyPressMask, &ev);
         XSetInputFocus(dpy->display, fwin, revert, CurrentTime);
 
-        if (XLookupKeysym((XKeyEvent *) &ev, 0) == KEY_PREFIX && !ev.xkey.state)
+        if (XLookupKeysym((XKeyEvent *)&ev, 0) == KEY_PREFIX && !ev.xkey.state)
         {
                 ev.xkey.window = fwin;
                 ev.xkey.state = MODIFIER_PREFIX;
-                XSendEvent (dpy->display, fwin, False, KeyPressMask, &ev);
+                XSendEvent(dpy->display, fwin, False, KeyPressMask, &ev);
                 XSync(dpy->display, False);
                 return;
         }
-        if (XLookupKeysym((XKeyEvent *) &ev, 0) >= '0' 
-            && XLookupKeysym((XKeyEvent *) &ev, 0) <= '9')
+        if (XLookupKeysym((XKeyEvent *)&ev, 0) >= '0' && XLookupKeysym((XKeyEvent *)&ev, 0) <= '9')
         {
-                goto_window_number (XLookupKeysym((XKeyEvent *) &ev, 0) - '0');
+                goto_window_number (XLookupKeysym((XKeyEvent *)&ev, 0) - '0');
                 return;
         }
-
-        switch (XLookupKeysym((XKeyEvent *) &ev, 0))
+        
+        switch (XLookupKeysym((XKeyEvent *)&ev, 0))
         {
                 case KEY_XTERM:
                         spawn (TERM_PROG);
@@ -60,6 +61,8 @@ handle_key (snfwm_screen *s)
                         log_warn("not handled");
                         break;
         }
+
+
 }
 
 void 
@@ -67,15 +70,16 @@ keypress(const XEvent *event)
 {
         log_info("to implement");
         snfwm_screen *s;
-        KeyCode ks;
         unsigned int mod;
+        KeyCode ks;
 
         mod = event->xkey.state;
-        ks = XLookupKeysym((XKeyEvent *) event, 0);
-        s  = find_screen(event->xkey.root);
+        s   = find_screen(event->xkey.root);
+        ks  = XLookupKeysym((XKeyEvent *) event, 0);
 
         if (s && ks == KEY_PREFIX && (mod & MODIFIER_PREFIX))
         {
                 handle_key (s);
+
         }
 }
