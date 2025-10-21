@@ -3,14 +3,11 @@
 #include "../../../include/x11_jobs.h"
 
 static void
-grab_key (snfwm_screen *s, char key)
+grab_key (snfwm_screen *s, char key, unsigned int modifier)
 {
-        XGrabKey
-        (
-                 dpy->display, XKeysymToKeycode(dpy->display, key), 
-                 AnyModifier, s->key_window, True, 
-                 GrabModeAsync, GrabModeAsync
-        );
+        KeyCode kc = XKeysymToKeycode(dpy->display, key);
+
+        XGrabKey(dpy->display, kc, modifier, s->root, True, GrabModeAsync, GrabModeAsync);
 }
 
 void
@@ -21,15 +18,15 @@ grab_keys (snfwm_screen *s)
         i = '0';
         while (i < '9')
         {
-                grab_key(s, (char) i);
+                grab_key(s, (char) i, MODIFIER_PREFIX_REV);
                 i++;
         }
-        grab_key(s, KEY_PREFIX);
-        grab_key(s, KEY_XTERM);
-        grab_key(s, KEY_EMACS);
-        grab_key(s, KEY_PREVWINDOW);
-        grab_key(s, KEY_NEXTWINDOW);
-        grab_key(s, KEY_TOGGLEBAR);
-        grab_key(s, KEY_LASTWINDOW);
-        grab_key(s, KEY_DELETE);
+        grab_key(s, KEY_PREFIX, MODIFIER_PREFIX_REV);
+        grab_key(s, KEY_XTERM, MODIFIER_PREFIX_REV);
+        grab_key(s, KEY_EMACS, MODIFIER_PREFIX_REV);
+        grab_key(s, KEY_PREVWINDOW, MODIFIER_PREFIX_REV);
+        grab_key(s, KEY_NEXTWINDOW, MODIFIER_PREFIX_REV);
+        grab_key(s, KEY_TOGGLEBAR, MODIFIER_PREFIX_REV);
+        grab_key(s, KEY_LASTWINDOW, MODIFIER_PREFIX_REV);
+        grab_key(s, KEY_DELETE, MODIFIER_PREFIX_REV);
 }

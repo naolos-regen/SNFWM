@@ -5,41 +5,28 @@
 #include "../../../include/x11_config.h"
 #include "../../../include/x11_jobs.h"
 
-#include <stdio.h>
-
 void
-handle_key (snfwm_screen *s)
+keypress(const XEvent *event)
 {
-        int revert;
-        Window fwin;
-        XEvent ev;
+        snfwm_screen *s;
+        unsigned int mod;
+        KeySym ks;
 
-        XGetInputFocus(dpy->display, &fwin, &revert);
-        XSetInputFocus(dpy->display, s->key_window, RevertToPointerRoot, CurrentTime);
-        XMaskEvent(dpy->display, KeyPressMask, &ev);
-        XSetInputFocus(dpy->display, fwin, revert, CurrentTime);
+        mod = event->xkey.state;
+        ks  = XLookupKeysym((XKeyEvent *) event, 0);
+        s   = find_screen(event->xkey.root);
 
-        if (XLookupKeysym((XKeyEvent *)&ev, 0) == KEY_PREFIX && !ev.xkey.state)
+        if (!s) return;
+
+        if (mod & MODIFIER_PREFIX_REV)
         {
-                ev.xkey.window = fwin;
-                ev.xkey.state = MODIFIER_PREFIX;
-                XSendEvent(dpy->display, fwin, False, KeyPressMask, &ev);
-                XSync(dpy->display, False);
-                return;
-        }
-        if (XLookupKeysym((XKeyEvent *)&ev, 0) >= '0' && XLookupKeysym((XKeyEvent *)&ev, 0) <= '9')
-        {
-                goto_window_number (XLookupKeysym((XKeyEvent *)&ev, 0) - '0');
-                return;
-        }
-        
-        switch (XLookupKeysym((XKeyEvent *)&ev, 0))
-        {
+                switch (ks)
+                {
                 case KEY_XTERM:
-                        spawn (TERM_PROG);
+                        spawn(TERM_PROG);
                         break;
                 case KEY_EMACS:
-                        spawn (EMACS_PROG);
+                        spawn(EMACS_PROG);
                         break;
                 case KEY_PREVWINDOW:
                         prev_window();
@@ -47,39 +34,19 @@ handle_key (snfwm_screen *s)
                 case KEY_NEXTWINDOW:
                         next_window();
                         break;
-                case KEY_TOGGLEBAR:
-                        log_warn("no toggle");
-                        break;
                 case KEY_LASTWINDOW:
                         last_window();
                         break;
                 case KEY_DELETE:
-                        if (ev.xkey.state & ShiftMask) kill_window();
+                        if (mod & ShiftMask) kill_window();
                         else delete_window();
                         break;
-                default:
-                        log_warn("not handled");
+                case KEY_TOGGLEBAR:
+                        log_warn("toggle bar not implemented");
                         break;
-        }
-
-
-}
-
-void 
-keypress(const XEvent *event)
-{
-        log_info("to implement");
-        snfwm_screen *s;
-        unsigned int mod;
-        KeyCode ks;
-
-        mod = event->xkey.state;
-        s   = find_screen(event->xkey.root);
-        ks  = XLookupKeysym((XKeyEvent *) event, 0);
-
-        if (s && ks == KEY_PREFIX && (mod & MODIFIER_PREFIX))
-        {
-                handle_key (s);
-
+                default:
+                        log_warn("Unhandled Mod4+key combo");
+                        break;
+                }
         }
 }
