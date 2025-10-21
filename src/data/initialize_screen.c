@@ -3,6 +3,8 @@
 #include "../../include/x11_jobs.h"
 #include "../../include/logger.h"
 
+#include <stdlib.h>
+
 void
 initialize_screen (snfwm_screen *s, int screen_num)
 {
@@ -37,7 +39,8 @@ initialize_screen (snfwm_screen *s, int screen_num)
         
         s->bar_raised = 0;
         // TODO: how the helly?
-        s->key_window = XCreateSimpleWindow(dpy->display, dpy->root, 0, 0, 1, 1, 0, XWhitePixel(dpy->display, 0), XBlackPixel(dpy->display, 0));
+        s->key_window = XCreateSimpleWindow(dpy->display, dpy->root, 0, 0, 1, 1, 0, WhitePixel(dpy->display, 0), BlackPixel(dpy->display, 0));
+
 
         XMapWindow(dpy->display, s->key_window);
 
