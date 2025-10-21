@@ -8,6 +8,7 @@
 #define X_CHANGE_WINDOW_ATTRIBUTES 2
 
 extern x11_display      *dpy;
+extern Window           key_window;
 extern XFontStruct      *font;
 extern int              num_screens;
 extern Atom             restart;

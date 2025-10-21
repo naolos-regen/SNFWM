@@ -34,9 +34,11 @@ initialize_screen (snfwm_screen *s, int screen_num)
 
         XSelectInput(dpy->display, dpy->root, PropertyChangeMask | ColormapChangeMask | SubstructureRedirectMask | KeyPressMask | SubstructureNotifyMask);
         XSync(dpy->display, 0);
-
-        s->bar_raised = 0;
         
+        s->bar_raised = 0;
+        // TODO: how the helly?
+        XCreateSimpleWindow(dpy->display, key_window, 0, 0, s->attr_root.width, s->attr_root.height, 0, 0, XBlackPixel(dpy->display, 0));
+
         grab_keys (s);
         scan_windows (s);
 }

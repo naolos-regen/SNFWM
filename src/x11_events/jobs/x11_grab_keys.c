@@ -8,7 +8,7 @@ grab_key (snfwm_screen *s, char key)
         XGrabKey
         (
                  dpy->display, XKeysymToKeycode(dpy->display, key), 
-                 AnyModifier, s->root, True, 
+                 AnyModifier, key_window, True, 
                  GrabModeAsync, GrabModeAsync
         );
 }

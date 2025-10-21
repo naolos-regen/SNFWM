@@ -1,6 +1,7 @@
 #include "../../include/x11_data.h"
 
 x11_display     *dpy;
+Window          key_window;
 XFontStruct     *font;
 
 Atom            restart;
