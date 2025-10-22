@@ -9,6 +9,13 @@ grab_key (snfwm_screen *s, char key, unsigned int modifier)
 
         XGrabKey(dpy->display, kc, modifier, s->root, True, GrabModeAsync, GrabModeAsync);
 }
+static void
+grab_key_shift (snfwm_screen *s, char key, unsigned int modifier)
+{
+        KeyCode kc = XKeysymToKeycode(dpy->display, key);
+        XGrabKey(dpy->display, kc, modifier, s->root, True, GrabModeAsync, GrabModeAsync);
+        XGrabKey(dpy->display, kc, ShiftMask, s->root, True, GrabModeAsync, GrabModeAsync);
+}
 
 void
 grab_keys (snfwm_screen *s)
@@ -29,4 +36,5 @@ grab_keys (snfwm_screen *s)
         grab_key(s, KEY_TOGGLEBAR, MODIFIER_PREFIX_REV);
         grab_key(s, KEY_LASTWINDOW, MODIFIER_PREFIX_REV);
         grab_key(s, KEY_DELETE, MODIFIER_PREFIX_REV);
+        grab_key_shift(s, KEY_DELETE, MODIFIER_PREFIX_REV);
 }

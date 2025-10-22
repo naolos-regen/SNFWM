@@ -28,7 +28,7 @@ void
 x11_error_handler(Display *dp, XErrorEvent *ev)
 {
         char buff[ERROR_BUFF_SIZE];
-
+        
         if (ev->request_code == X_CHANGE_WINDOW_ATTRIBUTES && ev->error_code == BadAccess)
         {
                 log_fatal("Only 1 instance please");

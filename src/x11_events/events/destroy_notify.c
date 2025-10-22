@@ -22,7 +22,8 @@ destroy_notify(const XEvent *event)
             log_info("dpy->root is equal to w->window");
             return;
         }
-        if (w->state == STATE_UNMAPPED) last_window ();
+        if (w->state == STATE_UNMAPPED) 
+                prev_window ();
         unmanage(w);
     }
 }
