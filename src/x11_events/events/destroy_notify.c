@@ -5,25 +5,40 @@
 #include "../../../include/x11_helpers.h"
 #include "../../../include/x11_data.h"
 
+int
+more_destroy_events ()
+{
+        XEvent ev;
+        if (XCheckTypedEvent(dpy->display, DestroyNotify, &ev))
+        {
+                XPutBackEvent(dpy->display, &ev);
+                return (1);
+        }
+        return (0);
+}
+
 void
 destroy_notify(const XEvent *event)
 {
-    snfwm_screen *s;
-    snfwm_window *w;
+        static int switch_window_pending = 0;
+        int last_destroy_event;
+        snfwm_window *win;
 
-    s  = find_screen(event->xdestroywindow.window);
-    w  = list_find_window(dpy->head, event->xdestroywindow.window);
-    
-    if (s && w)
-    {
-        log_debug("time to destroy a window");
-        if (w->window == dpy->root)
+        win = list_find_window(dpy->head, event->xdestroywindow.event);
+
+        last_destroy_event = !more_destroy_events();
+        if (win)
         {
-            log_info("dpy->root is equal to w->window");
-            return;
+                if (win == dpy->current)
+                {
+                        log_debug("Destroying current window");
+                        if (!last_destroy_event) switch_window_pending = 1;
+                        unmanage(win);
+                }
+                else 
+                {
+                        log_debug("Destroying  some other window");
+                        unmanage(win);
+                }
         }
-        if (w->state == STATE_UNMAPPED) 
-                prev_window ();
-        unmanage(w);
-    }
 }

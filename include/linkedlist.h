@@ -26,6 +26,7 @@ extern void             next_window        (void);
 extern void             prev_window        (void);
 extern void             last_window        (void);
 extern void             goto_window_number (int n);
+extern void             remove_from_window_list (snfwm_window *w);
 
 
 #endif

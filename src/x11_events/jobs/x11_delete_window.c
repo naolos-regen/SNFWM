@@ -1,6 +1,7 @@
 #include "../../../include/x11_jobs.h"
 #include "../../../include/x11_data.h"
 #include "../../../include/logger.h"
+#include "../../../include/linkedlist.h"
 
 void
 delete_window (void)
@@ -24,4 +25,5 @@ delete_window (void)
         {
                 log_warn("XSendEvent failed");
         }
+        prev_window();
 }
