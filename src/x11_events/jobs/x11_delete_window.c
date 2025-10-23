@@ -10,7 +10,8 @@ delete_window (void)
         int          st;
 
         if (dpy->current == NULL) return;
-        
+        XWindowAttributes attrs;
+
         ev.xclient.type         = ClientMessage;
         ev.xclient.window       = dpy->current->window;
         ev.xclient.message_type = wm_protocols;
