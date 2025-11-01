@@ -5,10 +5,17 @@
 void
 delete_window (void)
 {
-        XEvent       ev;
-        int          st;
+        XEvent            ev;
+        int               st;
+        XWindowAttributes attr;
 
         if (dpy->current == NULL) return;
+                
+        if (!XGetWindowAttributes(dpy->display, dpy->current->window, &attr))
+        {
+                log_warn("delete_window: window 0x%1x no longer exists", dpy->current->window);
+                return;
+        }
 
         ev.xclient.type = ClientMessage;
         ev.xclient.window = dpy->current->window;
