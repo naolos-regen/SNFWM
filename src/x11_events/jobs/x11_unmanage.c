@@ -1,6 +1,5 @@
 #include "../../../include/linkedlist.h"
 #include "../../../include/x11_jobs.h"
-#include "../../../include/x11_data.h"
 
 void
 unmanage(snfwm_window *w)
@@ -15,5 +14,5 @@ unmanage(snfwm_window *w)
                 dpy->current = NULL;
         }
 
-        list_remove(&dpy->head, w);
+        remove_from_window_list(w);
 }

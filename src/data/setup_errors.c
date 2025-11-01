@@ -24,18 +24,25 @@ alarm_handler (int val)
         XSync(dpy->display, False);
 }
 
-void
+int
 x11_error_handler(Display *dp, XErrorEvent *ev)
 {
         char buff[ERROR_BUFF_SIZE];
+        if (ev->error_code == BadWindow)
+        {
+                log_warn("bad window detected");
+                return (0);
 
+        }
         if (ev->request_code == X_CHANGE_WINDOW_ATTRIBUTES && ev->error_code == BadAccess)
         {
                 log_fatal("Only 1 instance please");
                 x_fatal("XLIB_ERROR", 1);
+                return (1);
         }
         XGetErrorText(dp, ev->error_code, buff, ERROR_BUFF_SIZE);
         log_error("encountered: %s", buff);
+        return (0);
 }
 
 void
