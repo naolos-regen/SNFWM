@@ -6,6 +6,7 @@ snfwm_window
         snfwm_window *node;
 
         node = begin_list;
+        if (!node) return NULL;
         while (node != NULL)
                 node = node->next;
         return (node);

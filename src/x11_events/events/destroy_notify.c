@@ -2,7 +2,6 @@
 #include "../../../include/logger.h"
 #include "../../../include/linkedlist.h"
 #include "../../../include/x11_jobs.h"
-#include "../../../include/x11_helpers.h"
 #include "../../../include/x11_data.h"
 
 int
@@ -26,19 +25,33 @@ destroy_notify(const XEvent *event)
 
         win = list_find_window(dpy->head, event->xdestroywindow.event);
 
-        last_destroy_event = !more_destroy_events();
-        if (win)
+        if (!win)
         {
-                if (win == dpy->current)
-                {
-                        log_debug("Destroying current window");
-                        if (!last_destroy_event) switch_window_pending = 1;
-                        unmanage(win);
-                }
-                else 
-                {
-                        log_debug("Destroying  some other window");
-                        unmanage(win);
-                }
+                log_debug("DestroyNotify for unmanaged window 0x%1x", event->xdestroywindow.window);
+                return;
+        }
+
+        log_debug("DestroyNotify for 0x%1x", win->window);
+
+        if (dpy->current == win)
+                dpy->current = NULL;
+        unmanage(win);
+
+        while (more_destroy_events())
+        {
+                XEvent dm;
+                XNextEvent(dpy->display, &dm);
+                log_debug("skipping extra destroynotify for window 0x%1x", dm.xdestroywindow.event);
+        }
+
+        if (dpy->current == NULL && dpy->head)
+        {
+                dpy->current = dpy->head;
+                log_debug("Switched focus to 0x%1x", dpy->current->window);
+                XWindowAttributes attrs;
+                if (XGetWindowAttributes(dpy->display, dpy->current->window, &attrs))
+                        set_active_window(dpy->current);
+                else
+                        log_warn("Head window 0x%1x is already gone", dpy->current->window);
         }
 }

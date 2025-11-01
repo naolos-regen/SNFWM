@@ -15,7 +15,7 @@
 #define KEY_NEXTWINDOW  'n'
 #define KEY_LASTWINDOW  't'	
 #define KEY_TOGGLEBAR   'w'
-#define KEY_DELETE      'k'	
+#define KEY_DELETE      'm'
 
 #define TERM_PROG       "alacritty"	
 #define EMACS_PROG      "emacs"	

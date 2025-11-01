@@ -1,5 +1,6 @@
 #include "../../include/linkedlist.h"
 #include "../../include/x11_data.h"
+#include "../../include/logger.h"
 
 static int
 sanity_check (snfwm_window *w)
@@ -29,9 +30,12 @@ set_active_window (snfwm_window *w)
         static int counter = 1;
         XWindowAttributes attrs;
 
-        sanity_check(w);
-        if (!XGetWindowAttributes(dpy->display, w->window, &attrs))
+        if (sanity_check(w) < 0) return;
+        
+        if (!XGetWindowAttributes(dpy->display, w->window, &attrs)){
+                log_warn("Skipping dead window 0x%1x", w->window);
                 return;
+        }
         w->last_access = counter;
         update_window(w, &attrs);
 }

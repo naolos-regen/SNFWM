@@ -11,6 +11,6 @@ remove_from_window_list (snfwm_window *w)
 
         if (w->prev != NULL) w->prev->next = w->next;
         if (w->next != NULL) w->next->prev = w->prev;
-
+        
         free(w);
 }
